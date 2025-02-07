@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== REMIXICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="admin-style.css">
+
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+    <div class="main-container">
+        <nav class="sidebar">
+	    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+	    <h3 class="sidebar-navigation">Navigation</h3>
+            <h2 class="sidebar-title">Admin Dashboard</h2>
+            <ul class="nav-list">
+                <li class="nav-item active" onclick="setActive(this)"><i class="ri-dashboard-line"></i> Overview</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-user-line"></i> User Management</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-calendar-line"></i> Appointment Management</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-time-line"></i> Queue Management</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-money-dollar-box-line"></i> Financial Management</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-chat-check-line"></i> Review Moderation</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-bar-chart-line"></i> Reports & Analytics</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-notification-3-line"></i> Notification Management</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-settings-3-line"></i> System Settings</li>
+                <li class="nav-item" onclick="setActive(this)"><i class="ri-shield-line"></i> Security & Backups</li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <!-- Main content goes here -->
+    
+    </div>
+
+        <!--=============== ADMIN JS ===============-->
+        <script src="admin-script.js"></script>
+    </body>
+</html>
