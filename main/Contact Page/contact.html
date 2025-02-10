@@ -17,12 +17,12 @@
                 <!-- Navbar -->
                 <nav class="navbar">
                     <ul class="nav-links">
-                        <li class="logo"><a href="#"><img src="images/federalbarbers-logo.png" alt="Logo"></a></li>
+                        <li class="logo"><a href="../Home Page/homepage.html"><img src="images/federalbarbers-logo.png" alt="Logo"></a></li>
                         
                         <div class="nav-items">
                             <li><a href="#">Booking</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="../Service Page/servicepage.html">Services</a></li>
+                            <li><a href="../About Page/about.html">About Us</a></li>
                             <li><a href="#">Contact Us</a></li>
                         </div>
     
@@ -48,7 +48,7 @@
                             </div>
                             <textarea rows="5" placeholder="Comment"></textarea>
                         </div>
-                        <button type="submit">Send</button>
+                        <button type="submit">SEND</button>
                     </fieldset>
                 </form>
             </div>
@@ -57,29 +57,31 @@
     <section id="review">
         <div class="review-container">
             <div class="image-section"></div>
-            <div class="form-section">
-                <div class="form-box">
-                    <h1 class="contact_title">Review</h1>
-                    <h3 class="contact_sub">Share your feedback with us!</h3>
-                    <input type="text" placeholder="Name">
-                    <select>
-                        <option>Select Barber</option>
-                        <option>John</option>
-                        <option>Mike</option>
-                        <option>Emma</option>
-                    </select>
-                    <select>
-                        <option>Service</option>
-                        <option>Haircut</option>
-                        <option>Shave</option>
-                    </select>
-                    <textarea placeholder="Share your experience"></textarea>
-                    <div class="rating">
-                        <span>Rate us! </span>
-                        <span class="stars">⭐ ⭐ ⭐ ⭐ ⭐</span>
+                <form method="post" action="mailto:federalbarbers123@gmail.com" autocomplete="on">
+                    <div class="form-section">
+                        <div class="form-box">
+                            <h1 class="contact_title">Review</h1>
+                            <h3 class="contact_sub">Share your feedback with us!</h3>
+                            <input type="text" placeholder="Name">
+                            <select>
+                                <option>Select Barber</option>
+                                <option>John</option>
+                                <option>Mike</option>
+                                <option>Emma</option>
+                            </select>
+                            <select>
+                                <option>Service</option>
+                                <option>Haircut</option>
+                                <option>Shave</option>
+                            </select>
+                            <textarea placeholder="How was your experience"></textarea>
+                            <div class="rating">
+                                <span>Rate us! </span>
+                                <span class="stars">⭐ ⭐ ⭐ ⭐ ⭐</span>
+                            </div>
+                            <button>SEND</button>
+                        </div>
                     </div>
-                    <button>SEND</button>
-                </div>
-            </div>
+                </form>
         </div>
     </section>
