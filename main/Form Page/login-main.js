@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const showSignUp = document.getElementById('show-signup');
     const showLogin = document.getElementById('show-login');
 
+
     showSignUp.addEventListener('click', function(e) {
         e.preventDefault();
         signUpForm.reset();

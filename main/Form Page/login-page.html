@@ -9,6 +9,7 @@
 
       <!--=============== CSS ===============-->
       <link rel="stylesheet" href="login-style.css">
+      
 
       <title>Form Page</title>
    </head>
@@ -19,9 +20,9 @@
 
             <!--=============== Login Form ===============-->
 
-            <form action="" class="login-form">
+            <form action="" class="login-form active">
                 <h1 class="login-title">Login</h1>
-
+                <div id="signInMessage" class="messageDiv" style="display: none;"></div>
                 <div class="login-contents">
                     <div class="login-box">
                         <i class="ri-user-5-line login-icon"></i>
@@ -57,16 +58,15 @@
 
             <!--=============== Sign Up Form ===============-->
 
-            <form action="" class="signup-form">
+            <form action="" class="signup-form" hidden>
                 <h1 class="signup-title">Sign Up</h1>
-
+                <div id="signUpMessage" class="messageDiv" style="display: none;"></div>
                 <div class="signup-contents">
-
                     <div class="signup-box">
                         <i class="ri-user-5-line login-icon"></i>
 
                         <div class="signup-box-input">
-                            <input type="name" class="signup-input" placeholder=" " required>
+                            <input type="name" class="signup-input" placeholder=" " id="rName" required>
                             <label for="" class="signup-label">Name</label>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <i class="ri-mail-line login-icon"></i>
 
                         <div class="signup-box-input">
-                            <input type="email" class="signup-input" placeholder=" " required>
+                            <input type="email" class="signup-input" placeholder=" " id="rEmail" required>
                             <label for="" class="signup-label">Email</label>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
 
-                <button class="signup-button">Sign Up</button>
+                <button class="signup-button" id="submitSignup">Sign Up</button>
 
                 <p class="signup-register">Already have an account?
                     <br>
@@ -111,5 +111,7 @@
       
       <!--=============== MAIN JS ===============-->
       <script src="login-main.js"></script>
+      <script type="module" src="firebase.js"></script>
+
    </body>
 </html>
