@@ -1,35 +1,28 @@
+// Function to set the active sidebar item and corresponding main content section
 function setActive(element) {
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    // Remove active class from all sidebar items
+    const sidebarItems = document.querySelectorAll('.sidebar-nav-item');
+    sidebarItems.forEach(item => item.classList.remove('active'));
+
+    // Add active class to the clicked sidebar item
     element.classList.add('active');
-}
 
-function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('collapsed');
-}
+    // Hide all main content sections
+    const mainContentSections = document.querySelectorAll('.main-content > div');
+    mainContentSections.forEach(section => section.classList.remove('active'));
 
-function checkSidebarCollapse() {
-    const sidebar = document.querySelector('.sidebar');
-    if (window.innerWidth <= 768) {
-        sidebar.classList.add('collapsed');
-        
-        sidebar.style.transition = 'none';
-        
-        setTimeout(() => {
-            sidebar.style.transition = '';
-        }, 100);
-    } else {
-        sidebar.classList.remove('collapsed');
+    // Show the corresponding main content section
+    const sectionClass = element.textContent.trim().toLowerCase().replace(/ & /g, '_').replace(/ /g, '_');
+    const activeSection = document.querySelector(`.main-${sectionClass}`);
+    if (activeSection) {
+        activeSection.classList.add('active');
     }
 }
 
-function closeSidebarOnClickOutside(event) {
-    const sidebar = document.querySelector('.sidebar');
-    if (window.innerWidth <= 768 && !sidebar.contains(event.target) && !event.target.matches('.toggle-btn')) {
-        sidebar.classList.add('collapsed');
+// Set the initial active section based on the active sidebar item
+document.addEventListener('DOMContentLoaded', () => {
+    const activeSidebarItem = document.querySelector('.sidebar-nav-item.active');
+    if (activeSidebarItem) {
+        setActive(activeSidebarItem);
     }
-}
-
-window.addEventListener('load', checkSidebarCollapse);
-window.addEventListener('resize', checkSidebarCollapse);
-document.addEventListener('click', closeSidebarOnClickOutside);
+});

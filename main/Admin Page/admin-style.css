@@ -1,167 +1,207 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap');
 
-body {
-    font-family: 'Inter', sans-serif;
+* {
     margin: 0;
     padding: 0;
-    display: flex;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+  
+body {
+    margin: 0;
+    padding: 0;
     background-color: #f4f4f4;
-    overflow: hidden;
 }
 
+/* Navbar Styles */
+.navbar {
+    width: 100%;
+    background: #fff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure the navbar is above the sidebar */
+}
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align logo to the left and nav items to the center */
+    background: #fff;
+    width: 100%; /* Full width */
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center; /* Center the navigation items */
+    flex-grow: 1;
+}
+
+.nav-items li {
+    margin: 0px; /* Space out the nav items */
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 0px; /* Space between the icons */
+}
+
+.nav-icons li {
+    list-style: none;
+}
+
+.nav-icons .nav-icon {
+    width: 30px; /* Adjust the size of the icons */
+    height: 30px;
+    object-fit: contain; /* Make sure the icon fits well within the size */
+}
+
+.nav-icons a {
+    display: block;
+    text-align: center;
+}
+  
+.nav-links .logo {
+    flex: 0 1 auto; /* Keep logo fixed size */
+}
+
+.nav-links .logo img {
+    height: 50px; /* Adjust the size of the logo */
+    width: auto;
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center; /* Center the nav items */
+    flex: 1; /* Take up all remaining space */
+}
+
+.nav-links li {
+    list-style: none;
+    margin: 0 12px;
+}
+
+.nav-links li a {
+    position: relative;
+    color: #333;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 6px 0;
+    text-decoration: none;
+}
+
+.nav-links li a:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: #ffffff;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+}
+.nav-links li a:before {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Position it just below the link */
+    left: 0;
+    width: 0;
+    height: 3px; /* Thickness of the line */
+    background: #d2bb85; /* Change to the color you want */
+    transition: all 0.3s ease; /* Smooth transition for the effect */
+    opacity: 0;
+}
+
+.nav-links li a:hover:before {
+    width: 100%;
+    opacity: 1; /* Make the line visible */
+}
+
+.nav-links li.upward a:before {
+    left: 0;
+    bottom: -5px;
+}
+
+.nav-links li.forward a:before {
+    left: 0;
+    transform: scaleX(0); /* Scale for 'Contact Us' */
+    transform-origin: right;
+    transition: transform 0.4s ease;
+}
+
+.nav-links li a:hover:before {
+    transform: scaleX(1);
+    transform-origin: left; /* Animate the scaleX from left */
+}
+/* END OF NAVBAR' */
+
+/* Sidebar Styles */
 .sidebar {
-    width: 230px;
+    width: 320px;
     height: 100vh;
     background-color: #fff;
-    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    overflow-y: hidden;
-    transition: width 0.3s ease, padding 0.3s ease;
-}
-
-.sidebar:hover {
     overflow-y: auto;
 }
 
-.sidebar.collapsed {
-    width: 80px;
-    padding: 10px;
-}
-
-.sidebar-navigation {
-    font-size: 14px;
+.sidebar-subtitle {
+    padding: 32px 32px 8px;
     color: #888;
-    font-weight: 500;
-    margin-top: 50px;
 }
 
 .sidebar-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 20px;
+    padding: 8px 32px 32px;
 }
 
-.nav-list {
+.sidebar-nav {
+    flex-grow: 1;
+}
+
+.sidebar-nav-list {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-.nav-item {
+.sidebar-nav-item {
+    padding: 16px 32px;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 12px 15px;
-    margin: 5px 0;
-    font-size: 12px;
-    color: #333;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    border-radius: 5px;
 }
 
-.nav-item i {
+.sidebar-nav-item i {
     margin-right: 10px;
-    font-size: 16px;
 }
 
-.nav-item:hover,
-.nav-item.active {
+.sidebar-nav-item.active, .sidebar-nav-item:hover {
     background-color: #AF906A;
     color: #fff;
 }
 
-.toggle-btn {
-    display: none;
-    font-size: 24px;
-    background-color: white;
-    border: none;
-    color: #333;
-    cursor: pointer;
-    padding: 5px;
-    padding-top: 0px;
-    padding-bottom: 3px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    border-radius: 5px;
-}
-
-.toggle-btn:hover {
-    background-color: #f0f0f0;
-    border-color: #999;
-}
-
+/* Main Content Styles */
 .main-content {
-
+    margin-left: 256px;
+    padding: 100px 20px 20px 20px;
 }
 
-/*========== Responsivess ==========*/
-
-@media screen and (max-width: 768px) {
-    .sidebar {
-        width: 220px;
-        padding: 15px;
-    }
-
-    .toggle-btn {
-        display: block;
-    }
-
-    .sidebar.collapsed {
-        width: 0;
-        padding: 0;
-    }
-
-    .sidebar-title {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-
-    .sidebar-navigation {
-        font-size: 12px;
-        margin-bottom: 15px;
-    }
-
-    .nav-item {
-        font-size: 12px;
-        padding: 10px 12px;
-    }
-
-    .nav-item i {
-        font-size: 14px;
-    }
-
-    .main-container {
-        display: flex;
-    }
-
-    .main-content {
-
-    }
+.main-content > div {
+    display: none;
 }
 
-@media screen and (max-width: 480px) {
-    .sidebar {
-        width: 100px;
-    }
-
-    .sidebar-title {
-        font-size: 14px;
-    }
-
-    .sidebar-navigation {
-        font-size: 10px;
-    }
-
-    .nav-item {
-        font-size: 12px;
-        padding: 8px 10px;
-    }
-
-    .nav-item i {
-        font-size: 14px;
-    }
-
-    .main-content {
-        
-    }
+.main-content > div.active {
+    display: block;
 }

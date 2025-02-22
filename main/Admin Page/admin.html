@@ -7,39 +7,100 @@
     <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-    <!--=============== CSS ===============-->
+    <!--=============== ADMIN CSS ===============-->
     <link rel="stylesheet" href="admin-style.css">
 
     <title>Admin Dashboard</title>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li class="logo"><a href="#"><img src="federalbarbers-logo.png" alt="Logo"></a></li>
+                                    
+            <div class="nav-items">
+                <li><a href="#">Booking</a></li>
+                <li><a href="../Service Page/servicepage.html">Services</a></li>
+                <li><a href="../About Page/about.html">About Us</a></li>
+                <li><a href="../Contact Page/contact.html">Contact Us</a></li>
+            </div>
 
-    <div class="main-container">
-        <nav class="sidebar">
-	    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-	    <h3 class="sidebar-navigation">Navigation</h3>
+            <div class="nav-icons">
+                <li><a href="#"><i class="ri-notification-2-line"></i></a></li>
+                <li><a href="#"><i class="ri-user-3-line"></i></a></li>
+                <li><a href="#"><i class="ri-list-check"></i></a></li>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div>
+            <h3 class="sidebar-subtitle">Navigation</h3>
             <h2 class="sidebar-title">Admin Dashboard</h2>
-            <ul class="nav-list">
-                <li class="nav-item active" onclick="setActive(this)"><i class="ri-dashboard-line"></i> Overview</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-user-line"></i> User Management</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-calendar-line"></i> Appointment Management</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-time-line"></i> Queue Management</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-money-dollar-box-line"></i> Financial Management</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-chat-check-line"></i> Review Moderation</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-bar-chart-line"></i> Reports & Analytics</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-notification-3-line"></i> Notification Management</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-settings-3-line"></i> System Settings</li>
-                <li class="nav-item" onclick="setActive(this)"><i class="ri-shield-line"></i> Security & Backups</li>
-            </ul>
-        </nav>
+        </div>
+        
+        <div>
+            <nav class="sidebar-nav">
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item active" onclick="setActive(this)"><i class="ri-dashboard-line"></i> Overview</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-user-line"></i> User Management</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-calendar-line"></i> Appointment Management</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-time-line"></i> Queue Management</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-money-dollar-box-line"></i> Financial Management</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-chat-check-line"></i> Review Moderation</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-bar-chart-line"></i> Reports & Analytics</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-notification-3-line"></i> Notification Management</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-settings-3-line"></i> System Settings</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-shield-line"></i> Security & Backups</li>
+                </ul>
+            </nav>
+        </div>
     </div>
 
     <div class="main-content">
-        <!-- Main content goes here -->
-    
+        <div class="main-overview active">
+            
+        </div>
+
+        <div class="main-user_management">
+            
+        </div>
+
+        <div class="main-appointment_management">
+            
+        </div>
+
+        <div class="main-queue_management">
+            
+        </div>
+
+        <div class="main-financial_management">
+            
+        </div>
+
+        <div class="main-review_moderation">
+            
+        </div>
+
+        <div class="main-reports_analytics">
+            
+        </div>
+
+        <div class="main-notification_management">
+            
+        </div>
+
+        <div class="main-system_settings">
+            
+        </div>
+
+        <div class="main-security_backups">
+            
+        </div>
     </div>
 
-        <!--=============== ADMIN JS ===============-->
-        <script src="admin-script.js"></script>
-    </body>
+    <!--=============== ADMIN JS ===============-->
+    <script src="admin-script.js"></script>
+</body>
 </html>
