@@ -398,8 +398,43 @@
         </div>        
 
         <div class="main-security_backups">
-            
-        </div>
+            <h2>Security & Backups</h2>
+        
+            <!-- User Authentication Settings -->
+            <div class="security-section">
+                <h3>Authentication & Security Policies</h3>
+                <label>
+                    <input type="checkbox" id="strongPasswords"> Enforce Strong Passwords
+                </label>
+                <label>
+                    <input type="checkbox" id="enable2FA"> Enable Two-Factor Authentication (2FA)
+                </label>
+                <label for="autoLogout">Auto Logout After (minutes):</label>
+                <input type="number" id="autoLogout" min="1" max="60">
+                <button onclick="saveSecuritySettings()">Save</button>
+            </div>
+        
+            <!-- Account Management -->
+            <div class="security-section">
+                <h3>Account Management</h3>
+                <button onclick="viewLockedAccounts()">View Locked Accounts</button>
+                <button onclick="viewLoginAttempts()">View Failed Login Attempts</button>
+            </div>
+        
+            <!-- Backup & Restore -->
+            <div class="security-section">
+                <h3>Backup & Restore</h3>
+                <button onclick="backupData()">Backup Data</button>
+                <input type="file" id="restoreFile">
+                <button onclick="restoreData()">Restore Data</button>
+            </div>
+        
+            <!-- Audit Logs -->
+            <div class="security-section">
+                <h3>Audit Logs & Activity Monitoring</h3>
+                <button onclick="viewAuditLogs()">View Logs</button>
+            </div>
+        </div>        
     </div>
 
     <!--=============== ADMIN JS ===============-->
