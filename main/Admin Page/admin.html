@@ -345,8 +345,57 @@
         </div>        
 
         <div class="main-system_settings">
-            
-        </div>
+            <h2>System Settings</h2>
+        
+            <!-- Business Hours Settings -->
+            <div class="settings-section">
+                <h3>Business Hours</h3>
+                <label for="openingTime">Opening Time:</label>
+                <input type="time" id="openingTime">
+                <label for="closingTime">Closing Time:</label>
+                <input type="time" id="closingTime">
+                <button onclick="saveBusinessHours()">Save</button>
+            </div>
+        
+            <!-- Service Duration Settings -->
+            <div class="settings-section">
+                <h3>Service Duration</h3>
+                <label for="serviceDuration">Duration per Appointment (minutes):</label>
+                <input type="number" id="serviceDuration" min="10" max="120">
+                <button onclick="saveServiceDuration()">Save</button>
+            </div>
+        
+            <!-- Booking Preferences -->
+            <div class="settings-section">
+                <h3>Booking Preferences</h3>
+                <label for="maxBookings">Max Bookings per Day:</label>
+                <input type="number" id="maxBookings" min="1" max="100">
+                <label>
+                    <input type="checkbox" id="onlineBookings"> Enable Online Bookings
+                </label>
+                <button onclick="saveBookingPreferences()">Save</button>
+            </div>
+        
+            <!-- Security Settings -->
+            <div class="settings-section">
+                <h3>Security Settings</h3>
+                <label>
+                    <input type="checkbox" id="passwordPolicy"> Enforce Strong Passwords
+                </label>
+                <label>
+                    <input type="checkbox" id="accountLockout"> Enable Account Lockout After 3 Failed Logins
+                </label>
+                <button onclick="saveSecuritySettings()">Save</button>
+            </div>
+        
+            <!-- Backup & Restore -->
+            <div class="settings-section">
+                <h3>Backup & Restore</h3>
+                <button onclick="backupData()">Backup Data</button>
+                <input type="file" id="restoreFile">
+                <button onclick="restoreData()">Restore Data</button>
+            </div>
+        </div>        
 
         <div class="main-security_backups">
             
