@@ -161,8 +161,53 @@
         </div>
 
         <div class="main-appointment_management">
-            
+            <h2>Appointment Management</h2>
+        
+            <button class="btn-add" onclick="openAddAppointmentModal()">+ Add Appointment</button>
+        
+            <table class="appointment-table">
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Barber</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentTableBody">
+                    <!-- Appointments will be dynamically inserted here -->
+                </tbody>
+            </table>
         </div>
+        
+        <!-- Add Appointment Modal -->
+        <div id="addAppointmentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeAddAppointmentModal()">&times;</span>
+                <h3>Add New Appointment</h3>
+                <form id="addAppointmentForm">
+                    <label for="clientName">Client Name:</label>
+                    <input type="text" id="clientName" required>
+        
+                    <label for="barberName">Barber:</label>
+                    <select id="barberName" required>
+                        <option value="Mike">Mike</option>
+                        <option value="David">David</option>
+                        <option value="Chris">Chris</option>
+                    </select>
+        
+                    <label for="appointmentDate">Date:</label>
+                    <input type="date" id="appointmentDate" required>
+        
+                    <label for="appointmentTime">Time:</label>
+                    <input type="time" id="appointmentTime" required>
+        
+                    <button type="submit">Add Appointment</button>
+                </form>
+            </div>
+        </div>             
 
         <div class="main-queue_management">
             
