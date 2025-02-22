@@ -193,15 +193,15 @@ body {
 }
 
 /* Main Content Styles */
-.main-content {
-    margin-left: 256px;
+.main {
+    margin-left: 320px;
     padding: 100px 20px 20px 20px;
 }
 
-.main-content > div {
+.main > div {
     display: none;
 }
 
-.main-content > div.active {
+.main > div.active {
     display: block;
 }

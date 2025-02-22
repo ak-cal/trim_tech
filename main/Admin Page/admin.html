@@ -9,6 +9,16 @@
 
     <!--=============== ADMIN CSS ===============-->
     <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="overview-style.css">
+    <link rel="stylesheet" href="user_management-style.css">
+    <link rel="stylesheet" href="appointment_management-style.css">
+    <link rel="stylesheet" href="queue_management-style.css">
+    <link rel="stylesheet" href="financial_management-style.css">
+    <link rel="stylesheet" href="review_moderation-style.css">
+    <link rel="stylesheet" href="reports_analytics-style.css">
+    <link rel="stylesheet" href="notification_management-style.css">
+    <link rel="stylesheet" href="system_settings-style.css">
+    <link rel="stylesheet" href="security_backups-style.css">
 
     <title>Admin Dashboard</title>
 </head>
@@ -23,6 +33,7 @@
                 <li><a href="../Service Page/servicepage.html">Services</a></li>
                 <li><a href="../About Page/about.html">About Us</a></li>
                 <li><a href="../Contact Page/contact.html">Contact Us</a></li>
+                <li><a href="../Admin Page/admin.html">Admin Dashboard</a></li>
             </div>
 
             <div class="nav-icons">
@@ -58,13 +69,75 @@
         </div>
     </div>
 
-    <div class="main-content">
+    <div class="main">
         <div class="main-overview active">
             
         </div>
 
         <div class="main-user_management">
-            
+            <h2>User Management</h2>
+
+            <!-- Search & Filter -->
+            <div class="user-search">
+                <input type="text" id="searchUser" placeholder="Search by name or email..." onkeyup="filterUsers()">
+                <select id="filterRole" onchange="filterUsers()">
+                    <option value="">All Roles</option>
+                    <option value="Client">Client</option>
+                    <option value="Barber">Barber</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+
+            <!-- Add User Button -->
+            <button class="btn btn-add" onclick="openAddUserModal()">+ Add User</button>
+
+            <!-- Add User Modal -->
+            <div id="addUserModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeAddUserModal()">&times;</span>
+                    <h3>Add New User</h3>
+
+                    <form id="addUserForm">
+                        <label for="userName">Name:</label>
+                        <input type="text" id="userName" required>
+
+                        <label for="userEmail">Email:</label>
+                        <input type="email" id="userEmail" required>
+
+                        <label for="userRole">Role:</label>
+                        <select id="userRole">
+                            <option value="Client">Client</option>
+                            <option value="Barber">Barber</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+
+                        <label for="userStatus">Status:</label>
+                        <select id="userStatus">
+                            <option value="Active">Active</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Suspended">Suspended</option>
+                        </select>
+
+                        <button type="submit" class="btn btn-save">Save User</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- User List Table -->
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- Users will be dynamically loaded here -->
+                </tbody>
+            </table>
         </div>
 
         <div class="main-appointment_management">
@@ -102,5 +175,15 @@
 
     <!--=============== ADMIN JS ===============-->
     <script src="admin-script.js"></script>
+    <script src="overview-script.js"></script>
+    <script src="user_management-script.js"></script>
+    <script src="appointment_management-script.js"></script>
+    <script src="queue_management-script.js"></script>
+    <script src="financial_management-script.js"></script>
+    <script src="review_moderation-script.js"></script>
+    <script src="reports_analytics-script.js"></script>
+    <script src="notification_management-script.js"></script>
+    <script src="system_settings-script.js"></script>
+    <script src="security_backups-script.js"></script>
 </body>
 </html>

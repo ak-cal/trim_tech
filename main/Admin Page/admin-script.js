@@ -8,7 +8,7 @@ function setActive(element) {
     element.classList.add('active');
 
     // Hide all main content sections
-    const mainContentSections = document.querySelectorAll('.main-content > div');
+    const mainContentSections = document.querySelectorAll('.main > div');
     mainContentSections.forEach(section => section.classList.remove('active'));
 
     // Show the corresponding main content section
