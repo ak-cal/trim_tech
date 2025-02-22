@@ -69,6 +69,7 @@
         </div>
     </div>
 
+    <!-- Main Content -->
     <div class="main">
         <div class="main-overview active">
             <h2>Dashboard Overview</h2>
@@ -312,8 +313,36 @@
         </div>        
 
         <div class="main-notification_management">
-            
-        </div>
+            <h2>Notification Management</h2>
+        
+            <div class="notification-form">
+                <label for="recipientType">Recipient Type:</label>
+                <select id="recipientType">
+                    <option value="client">Clients</option>
+                    <option value="barber">Barbers</option>
+                </select>
+        
+                <label for="notificationMessage">Message:</label>
+                <textarea id="notificationMessage" rows="3" placeholder="Enter notification message"></textarea>
+        
+                <button onclick="sendNotification()">Send Notification</button>
+            </div>
+        
+            <h3>Sent Notifications</h3>
+            <table class="notification-table">
+                <thead>
+                    <tr>
+                        <th>Recipient Type</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="notificationTableBody">
+                    <!-- Notifications will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>        
 
         <div class="main-system_settings">
             
