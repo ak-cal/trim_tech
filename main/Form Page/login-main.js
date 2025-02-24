@@ -18,6 +18,20 @@ const showHidePassword = (loginPass, loginEye) => {
 showHidePassword('login-password', 'login-eye');
 showHidePassword('signup-password', 'signup-eye');
 
+function adjustZoom() {
+    let zoomLevel = Math.round(window.devicePixelRatio * 100);
+    
+    if (zoomLevel === 90) {
+        document.body.style.transform = "scale(1.11)";
+        document.body.style.transformOrigin = "top left";
+    } else {
+        document.body.style.transform = "scale(1)";
+    }
+}
+
+window.addEventListener("resize", adjustZoom);
+adjustZoom();
+
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.querySelector('.login-form');
     const signUpForm = document.querySelector('.signup-form');
