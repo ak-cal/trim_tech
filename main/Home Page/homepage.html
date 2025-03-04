@@ -3,21 +3,28 @@
 
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== REMIXICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="homepage-style.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../main.css">
+
     <title>TrimTech - Home</title>    
    </head>
-   <body>
+   <body id="top">
     <!-- Navbar -->
     <nav class="navbar">
         <ul class="nav-links">
             <li class="logo"><a href="#"><img src="federalbarbers-logo.png" alt="Logo"></a></li>
             
             <div class="nav-items">
-                <li><a href="#">Booking</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="../Booking Page/bookingpage.html">Booking</a></li>
+                <li><a href="../About Page/about.html">About</a></li>
+                <li><a href="../Service Page/servicepage.html">Services</a></li>
+                <li><a href="../Contact Page/contact.html">Contact</a></li>
             </div>
 
 
@@ -31,16 +38,16 @@
     </nav>
 
     <!-- Header Image -->
-    <div class="header">
+    <div id="header">
         <img src="header-img.png" alt="Header Image">
         <div class="header-content">
             <h1>Welcome to Federal Barbers</h1>
             <p>Made possible with Trim Tech bleh bleh.</p>
-            <a href="#" class="book-now-btn">Book Now</a>
+            <a style="font-size: 1em" href="#" class="book-now-btn">Book Appointment</a>
         </div>
     </div>
     <!-- Info Area -->
-    <section class="info-section">
+    <section id="info-section">
         <div class="info-section-innerbox">
             <h2>Our Styles & Services</h2>
             <p>place holders lang muna.</p>
@@ -60,20 +67,28 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="federalbarbers-logo.png" alt="Federal Barbers Logo">
+                <a href="../Home Page/homepage.html"><img src="federalbarbers-logo.png" alt="Federal Barbers Logo"></a>
             </div>
     
             <div class="footer-links">
-                <a href="#">Services</a>
-                <a href="#">Booking</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact</a>
+                <a href="../Booking Page/bookingpage.html">Booking</a>  
+                <a href="../About Page/about.html">About</a>    
+                <a href="../Service Page/servicepage.html">Services</a> 
+                <a href="../Contact Page/contact.html">Contact</a>  
             </div>
-    
-            <div class="footer-social">
-                <a href="#"><img src="facebook-logo.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram-logo.png" alt="Instagram"></a>
-                <a href="#"><img src="x-logo.png" alt="Twitter"></a>
+            <div class="footer-links">
+                <a href="#header">Home</a>  
+                <a href="#info-section">Styles & Services</a>  
+                <a href="#top">Back to Top</a>    
+
+            </div>
+            <div class="footer-main-social">
+                <p>Socials</p>
+                <div class="footer-social">
+                    <a href="#"><i  class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                    <a href="#"><i class="ri-twitter-x-line"></i></a>
+                </div>
             </div>
         </div>
     
@@ -82,8 +97,6 @@
         </div>
     </footer>
     
-
-
 </body>
 
 
