@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="system_settings-style.css">
     <link rel="stylesheet" href="security_backups-style.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
     <title>Admin Dashboard</title>
 </head>
 <body>
@@ -58,7 +60,7 @@
                     <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-user-line"></i> User Management</li>
                     <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-calendar-line"></i> Appointment Management</li>
                     <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-time-line"></i> Queue Management</li>
-                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-money-dollar-box-line"></i> Financial Management</li>
+                    <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-money-dollar-box-line"></i> Service Management</li>
                     <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-chat-check-line"></i> Review Moderation</li>
                     <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-bar-chart-line"></i> Reports & Analytics</li>
                     <li class="sidebar-nav-item" onclick="setActive(this)"><i class="ri-notification-3-line"></i> Notification Management</li>
@@ -103,43 +105,72 @@
                 <input type="text" id="searchUser" placeholder="Search by name or email..." onkeyup="filterUsers()">
                 <select id="filterRole" onchange="filterUsers()">
                     <option value="">All Roles</option>
-                    <option value="Client">Client</option>
-                    <option value="Barber">Barber</option>
-                    <option value="Admin">Admin</option>
+                    <option value="customer">Client</option>
+                    <option value="barber">Barber</option>
+                    <option value="admin">Admin</option>
                 </select>
             </div>
 
             <!-- Add User Button -->
-            <button class="btn btn-add" onclick="openAddUserModal()">+ Add User</button>
+            <button class="btn btn-add" onclick="openAddUserModal()" id="show-signup">+ Add User</button>
 
             <!-- Add User Modal -->
             <div id="addUserModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeAddUserModal()">&times;</span>
                     <h3>Add New User</h3>
+                    <br>
+                    <form action="" class="signup-form">
+                        <div id="signUpMessage" class="messageDiv" style="display: none;"></div>
+                        <div class="signup-contents">
+                            <div class="signup-box">
+                                <i class="ri-user-5-line login-icon"></i>
+                                <div class="signup-box-input">
+                                    <input type="name" class="signup-input" placeholder=" " id="rName" required>
+                                    <label for="" class="signup-label">Name</label>
+                                </div>
+                            </div>
+        
+                            <div class="signup-box">
+                                <i class="ri-mail-line login-icon"></i>
+                                <div class="signup-box-input">
+                                    <input type="email" class="signup-input" placeholder=" " id="rEmail" required>
+                                    <label for="" class="signup-label">Email</label>
+                                </div>
+                            </div>
+        
+                            <div class="signup-box">
+                                <i class="ri-phone-line login-icon"></i>
+                                <div class="signup-box-input">
+                                    <input type="text" class="signup-input" id="signup-phone" placeholder=" " required required pattern="0[9][0-9]{9}" maxlength="11">
+                                    <label for="" class="signup-label">Phone Number(63+)</label>
+                                </div>
+                            </div>
+        
+                            <div class="signup-box">
+                                <i class="ri-lock-2-line"></i>
+                                <div class="signup-box-input">
+                                    <input type="password" class="signup-input" id="signup-password" placeholder=" " required>
+                                    <label for="" class="signup-label">Password</label>
+                                    <i class="ri-eye-close-line login-viewoff" id="signup-eye" ></i>
+                                </div>
+                            </div>
 
-                    <form id="addUserForm">
-                        <label for="userName">Name:</label>
-                        <input type="text" id="userName" required>
-
-                        <label for="userEmail">Email:</label>
-                        <input type="email" id="userEmail" required>
-
-                        <label for="userRole">Role:</label>
-                        <select id="userRole">
-                            <option value="Client">Client</option>
-                            <option value="Barber">Barber</option>
-                            <option value="Admin">Admin</option>
-                        </select>
-
-                        <label for="userStatus">Status:</label>
-                        <select id="userStatus">
-                            <option value="Active">Active</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Suspended">Suspended</option>
-                        </select>
-
-                        <button type="submit" class="btn btn-save">Save User</button>
+                            <div class="signup-box">
+                                <i class="ri-user-settings-line login-icon"></i>
+                                <div class="signup-box-input">
+                                    <select id="signup-role" class="signup-input">
+                                        <option value="customer">Customer</option>
+                                        <option value="barber">Barber</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="admin,barber">Admin Barber</option>
+                                    </select>
+                                    <label for="" class="signup-label">Role</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="signup-button" id="submitSignup">Save User</button>
                     </form>
                 </div>
             </div>
@@ -150,8 +181,8 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Role</th>
-                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -441,6 +472,7 @@
     <script src="admin-script.js"></script>
     <script src="overview-script.js"></script>
     <script src="user_management-script.js"></script>
+    <script type="module" src="user_management-database.js"></script>
     <script src="appointment_management-script.js"></script>
     <script src="queue_management-script.js"></script>
     <script src="service_management-script.js"></script>

@@ -1,111 +1,37 @@
-document.addEventListener("DOMContentLoaded", loadUsers);
-
-const users = [
-    { name: "John Doe", email: "john@example.com", role: "Client", status: "Active" },
-    { name: "Sarah Smith", email: "sarah@example.com", role: "Barber", status: "Pending" },
-    { name: "Admin User", email: "admin@example.com", role: "Admin", status: "Active" }
-];
-
-// Load users into the table
-function loadUsers() {
-    const userTableBody = document.getElementById("userTableBody");
-    userTableBody.innerHTML = "";
-    
-    users.forEach((user, index) => {
-        let row = `
-            <tr>
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td>${user.role}</td>
-                <td>${user.status}</td>
-                <td>
-                    <button class="btn btn-edit" onclick="editUser(${index})">Edit</button>
-                    <button class="btn btn-suspend" onclick="suspendUser(${index})">${user.status === "Active" ? "Suspend" : "Activate"}</button>
-                    <button class="btn btn-delete" onclick="deleteUser(${index})">Delete</button>
-                </td>
-            </tr>
-        `;
-        userTableBody.innerHTML += row;
-    });
-}
-
-// Search and filter users
-function filterUsers() {
-    const searchValue = document.getElementById("searchUser").value.toLowerCase();
-    const filterRole = document.getElementById("filterRole").value;
-
-    const filteredUsers = users.filter(user => 
-        (user.name.toLowerCase().includes(searchValue) || user.email.toLowerCase().includes(searchValue)) &&
-        (filterRole === "" || user.role === filterRole)
-    );
-
-    document.getElementById("userTableBody").innerHTML = filteredUsers.map((user, index) => `
-        <tr>
-            <td>${user.name}</td>
-            <td>${user.email}</td>
-            <td>${user.role}</td>
-            <td>${user.status}</td>
-            <td>
-                <button class="btn btn-edit" onclick="editUser(${index})">Edit</button>
-                <button class="btn btn-suspend" onclick="suspendUser(${index})">${user.status === "Active" ? "Suspend" : "Activate"}</button>
-                <button class="btn btn-delete" onclick="deleteUser(${index})">Delete</button>
-            </td>
-        </tr>
-    `).join("");
-}
-
-// Edit user function (mockup)
-function editUser(index) {
-    alert(`Edit user: ${users[index].name}`);
-}
-
-// Suspend/Activate user
-function suspendUser(index) {
-    users[index].status = users[index].status === "Active" ? "Suspended" : "Active";
-    loadUsers();
-}
-
-// Delete user
-function deleteUser(index) {
-    if (confirm(`Are you sure you want to delete ${users[index].name}?`)) {
-        users.splice(index, 1);
-        loadUsers();
-    }
-}
-
-// Open the modal
+// Open & Close Modals
 function openAddUserModal() {
-    document.getElementById("addUserModal").style.display = "block";
+    document.getElementById('addUserModal').style.display = 'block';
 }
 
-// Close the modal
 function closeAddUserModal() {
-    document.getElementById("addUserModal").style.display = "none";
+    document.getElementById('addUserModal').style.display = 'none';
 }
 
-// Handle form submission
-document.getElementById("addUserForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+const showHidePassword = (signUpPass, signUpEye) => {
+    const passInput = document.getElementById(signUpPass),
+            eyeIcon = document.getElementById(signUpEye)
 
-    // Get input values
-    const name = document.getElementById("userName").value;
-    const email = document.getElementById("userEmail").value;
-    const role = document.getElementById("userRole").value;
-    const status = document.getElementById("userStatus").value;
+    eyeIcon.addEventListener('click', () => {
+        if (passInput.type === 'password') {
+            passInput.type = 'text';
+            eyeIcon.classList.add('ri-eye-2-line');
+            eyeIcon.classList.remove('ri-eye-close-line');
+        } else {
+            passInput.type = 'password';
+            eyeIcon.classList.remove('ri-eye-2-line');
+            eyeIcon.classList.add('ri-eye-close-line');
+        }
+    })
+}
 
-    // Validate input (basic validation)
-    if (!name || !email) {
-        alert("Please enter a valid name and email.");
-        return;
-    }
+showHidePassword('signup-password', 'signup-eye');
 
-    // Add new user to the list
-    users.push({ name, email, role, status });
-    
-    // Refresh table & close modal
-    loadUsers();
-    closeAddUserModal();
-    
-    // Clear form fields
-    document.getElementById("addUserForm").reset();
+document.addEventListener('DOMContentLoaded', function() {
+    const signUpForm = document.querySelector('.signup-form');
+    const showSignUp = document.getElementById('show-signup');
+
+    showSignUp.addEventListener('click', function(e) {
+        e.preventDefault();
+        signUpForm.reset();
+    });
 });
