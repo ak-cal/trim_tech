@@ -104,6 +104,8 @@ window.editUser = async function(email) {
       return;
   }
 
+  console.log("User found: ", data);
+
   document.getElementById('editUserName').value = data.name;
   document.getElementById('editUserPhone').value = data.phone;
   document.getElementById('editUserRole').value = data.role;
@@ -129,6 +131,8 @@ window.editUser = async function(email) {
           .eq('email', email);
 
       if (error) throw error;
+
+      console.log("User updated:", data);
 
       console.log("Updated User Successfully");
       showMessage("Updated User Successfully", "editUserMessage");
