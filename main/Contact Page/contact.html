@@ -11,6 +11,7 @@
             <link rel="stylesheet" href="contact-style.css">
             <link rel="stylesheet" href="../main.css">
         
+
             <title>Contact</title>
         </head>
         <body>
@@ -58,7 +59,6 @@
     <section id="review">
         <div class="review-container">
             <div class="image-section"></div>
-                <form method="post" action="mailto:federalbarbers123@gmail.com" autocomplete="on">
                     <div class="form-section">
                         <div class="form-box">
                             <h1 class="contact_title">Review</h1>
@@ -70,20 +70,23 @@
                                 <option>Mike</option>
                                 <option>Emma</option>
                             </select>
-                            <select>
+                            <select class="drop-service">
                                 <option>Service</option>
-                                <option>Haircut</option>
-                                <option>Shave</option>
                             </select>
                             <textarea placeholder="How was your experience"></textarea>
                             <div class="rating">
                                 <span>Rate us! </span>
-                                <span class="stars">⭐ ⭐ ⭐ ⭐ ⭐</span>
+                                <select>
+                                    <option>5</option>
+                                    <option>4</option>
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>1</option>
+                                </select>
                             </div>
                             <button>SEND</button>
                         </div>
                     </div>
-                </form>
         </div>
     </section>
                <!-- FOOTER  -->
@@ -121,5 +124,10 @@
             <p>© 2025 Trim Tech. All Rights Reserved.</p>
         </div>
     </footer> 
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="contact.js"></script>
+
     </body>
+    
+
 </html>
