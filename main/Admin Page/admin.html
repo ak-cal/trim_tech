@@ -287,7 +287,58 @@
         </div>
 
         <div class="main-service_management">
-            
+            <h2>Service Management</h2>
+            <button class="btn-add" onclick="openAddServiceModal()">+ Add Service</button>
+
+    
+            <table class="queue-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="serviceTableBody">
+                    <!-- Services will be dynamically inserted here -->
+                </tbody>
+            </table>
+            <div id="editServiceModal" class="modal">
+                <div class="modal-content">
+                    <h2>Edit Service</h2>
+                    <form id="editServiceForm">
+                        <input type="hidden" id="editServiceId">
+                        <label>Name:</label>
+                        <input type="text" id="editServiceName" required>
+                        <label>Description:</label>
+                        <input type="text" id="editServiceDescription" required>
+                        <label>Price:</label>
+                        <input type="number" id="editServicePrice" step="0.01" required>
+                        <button style ="margin-bottom: 10px;" type="submit">Update Service</button>
+                        <button type="button" onclick="closeEditModal()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Add Service Modal -->
+            <div id="addServiceModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeAddServiceModal()">&times;</span>
+                    <h3>Add New Service</h3>
+                    <form id="addServiceForm">
+                        <label for="serviceName">Service Name:</label>
+                        <input type="text" id="serviceName" required>
+    
+                        <label for="serviceDescription">Description:</label>
+                        <input type="text" id="serviceDescription" required>
+    
+                        <label for="servicePrice">Price:</label>
+                        <input type="number" id="servicePrice" required>
+    
+                        <button type="submit">Add Service</button>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <div class="main-review_moderation">
@@ -476,6 +527,7 @@
     <script src="appointment_management-script.js"></script>
     <script src="queue_management-script.js"></script>
     <script src="service_management-script.js"></script>
+    <script type="module" src="service_management-data.js"></script>
     <script src="review_moderation-script.js"></script>
     <script src="reports_analytics-script.js"></script>
     <script src="notification_management-script.js"></script>
