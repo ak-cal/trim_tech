@@ -30,8 +30,6 @@ signUp.addEventListener('click', async (event) => {
   const phone = document.getElementById('signup-phone').value;
   const password = document.getElementById('signup-password').value;
 
-  console.log("Phone input:", phone);
-
   try {
     // Proceed with signup
     const { data, error } = await supabase.auth.signUp({
