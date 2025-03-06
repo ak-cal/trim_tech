@@ -6,6 +6,4 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 // Initialize Supabase client
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-export function initialise() {
-    console.log("Script is loaded");
-}
+
