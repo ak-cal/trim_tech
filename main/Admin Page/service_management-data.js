@@ -1,5 +1,6 @@
 import { supabase } from "../main.js";
 
+// Services Management Functions //
 async function fetchServices() {
     const { data, error } = await supabase
         .from('Services')
@@ -25,8 +26,8 @@ async function fetchServices() {
                 <td>${service.description}</td>
                 <td>Php ${service.price.toFixed(2)}</td>
                 <td>
-                    <button onclick="editService('${service.service_id}', '${service.name}', '${service.description}', ${service.price})">Edit</button>
-                    <button onclick="deleteService('${service.service_id}')">Delete</button>
+                    <button class="btn-delete" onclick="editService('${service.service_id}', '${service.name}', '${service.description}', ${service.price})">Edit</button>
+                    <button class="btn-delete" onclick="deleteService('${service.service_id}')">Delete</button>
                 </td>
             </tr>
         `;
@@ -134,3 +135,61 @@ document.getElementById("addServiceForm").addEventListener("submit", async funct
 
 // Ensure services load when the page is ready
 document.addEventListener("DOMContentLoaded", fetchServices);
+
+// END OF SERVICES //
+
+// Review Moderation System Logic //
+async function fetchReviews() {
+    const { data, error } = await supabase
+        .from('Reviews')
+        .select('*');
+
+    if (error) {
+        console.error("Error fetching Reviews:", error);
+        return;
+    }
+
+    const tableBody = document.getElementById("reviewTableBody");
+    if (!tableBody) {
+        console.error("Table body element not found!");
+        return;
+    }
+
+    tableBody.innerHTML = ""; // Clear existing content
+
+    data.forEach(review => {
+        let row = `
+            <tr>
+                <td>${review.customer_name}</td>
+                <td>${"⭐".repeat(review.rating)}</td>
+                <td>${review.comment}</td>
+                <td>${review.barber_name}</td>
+                <td>${review.service_name}</td>
+                <td>
+                    <button class="btn-delete" onclick="deleteFeedback('${review.review_id}')">Delete</button>
+                </td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+
+window.deleteFeedback = async function(reviewId) {
+    if (confirm("Are you sure you want to delete this review?")) {
+        try {
+            const { error } = await supabase
+                .from('Reviews')
+                .delete()
+                .eq('review_id', reviewId);
+
+            if (error) throw error;
+
+            console.log("Review deleted successfully!"); 
+            fetchReviews(); // Reload table
+
+        } catch (err) {
+            console.error("Error deleting review:", err);
+        }
+    }
+};
+document.addEventListener("DOMContentLoaded", fetchReviews);
