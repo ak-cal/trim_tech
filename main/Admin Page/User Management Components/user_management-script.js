@@ -7,6 +7,14 @@ function closeAddUserModal() {
     document.getElementById('addUserModal').style.display = 'none';
 }
 
+function openEditUserModal() {
+    document.getElementById('editUserModal').style.display = 'block';
+}
+
+function closeEditUserModal() {
+    document.getElementById('editUserModal').style.display = 'none';
+}
+
 const showHidePassword = (signUpPass, signUpEye) => {
     const passInput = document.getElementById(signUpPass),
             eyeIcon = document.getElementById(signUpEye)

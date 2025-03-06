@@ -1,4 +1,4 @@
-import { supabase } from "../main.js";
+import { supabase } from "../../main.js";
 
 // Services Management Functions //
 async function fetchServices() {

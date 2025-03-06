@@ -9,18 +9,16 @@
 
     <!--=============== ADMIN CSS ===============-->
     <link rel="stylesheet" href="admin-style.css">
-    <link rel="stylesheet" href="overview-style.css">
-    <link rel="stylesheet" href="user_management-style.css">
-    <link rel="stylesheet" href="appointment_management-style.css">
-    <link rel="stylesheet" href="queue_management-style.css">
-    <link rel="stylesheet" href="service_management-style.css">
-    <link rel="stylesheet" href="review_moderation-style.css">
-    <link rel="stylesheet" href="reports_analytics-style.css">
-    <link rel="stylesheet" href="notification_management-style.css">
-    <link rel="stylesheet" href="system_settings-style.css">
-    <link rel="stylesheet" href="security_backups-style.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link rel="stylesheet" href="Overview Components/overview-style.css">
+    <link rel="stylesheet" href="User Management Components/user_management-style.css">
+    <link rel="stylesheet" href="Appointment Management Components/appointment_management-style.css">
+    <link rel="stylesheet" href="Queue Management Components/queue_management-style.css">
+    <link rel="stylesheet" href="Service Management Components/service_management-style.css">
+    <link rel="stylesheet" href="Review Moderation Components/review_moderation-style.css">
+    <link rel="stylesheet" href="Reports Analytics Components/reports_analytics-style.css">
+    <link rel="stylesheet" href="Notification Management Components/notification_management-style.css">
+    <link rel="stylesheet" href="System Settings Components/system_settings-style.css">
+    <link rel="stylesheet" href="Security Backups Components/security_backups-style.css">
 
     <title>Admin Dashboard</title>
 </head>
@@ -120,14 +118,14 @@
                     <span class="close" onclick="closeAddUserModal()">&times;</span>
                     <h3>Add New User</h3>
                     <br>
+                    <div id="signUpMessage" class="messageDiv"></div>
                     <form action="" class="signup-form">
-                        <div id="signUpMessage" class="messageDiv" style="display: none;"></div>
                         <div class="signup-contents">
                             <div class="signup-box">
                                 <i class="ri-user-5-line login-icon"></i>
                                 <div class="signup-box-input">
                                     <input type="name" class="signup-input" placeholder=" " id="rName" required>
-                                    <label for="" class="signup-label">Name</label>
+                                    <label for="rName" class="signup-label">Name</label>
                                 </div>
                             </div>
         
@@ -135,7 +133,7 @@
                                 <i class="ri-mail-line login-icon"></i>
                                 <div class="signup-box-input">
                                     <input type="email" class="signup-input" placeholder=" " id="rEmail" required>
-                                    <label for="" class="signup-label">Email</label>
+                                    <label for="rEmail" class="signup-label">Email</label>
                                 </div>
                             </div>
         
@@ -143,7 +141,7 @@
                                 <i class="ri-phone-line login-icon"></i>
                                 <div class="signup-box-input">
                                     <input type="text" class="signup-input" id="signup-phone" placeholder=" " required required pattern="0[9][0-9]{9}" maxlength="11">
-                                    <label for="" class="signup-label">Phone Number(63+)</label>
+                                    <label for="signup-phone" class="signup-label">Phone Number(63+)</label>
                                 </div>
                             </div>
         
@@ -151,7 +149,7 @@
                                 <i class="ri-lock-2-line"></i>
                                 <div class="signup-box-input">
                                     <input type="password" class="signup-input" id="signup-password" placeholder=" " required>
-                                    <label for="" class="signup-label">Password</label>
+                                    <label for="signup-password" class="signup-label">Password</label>
                                     <i class="ri-eye-close-line login-viewoff" id="signup-eye" ></i>
                                 </div>
                             </div>
@@ -165,16 +163,42 @@
                                         <option value="admin">Admin</option>
                                         <option value="admin,barber">Admin Barber</option>
                                     </select>
-                                    <label for="" class="signup-label">Role</label>
+                                    <label for="signup-role" class="signup-label">Role</label>
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <button class="signup-button" id="submitSignup">Save User</button>
+
+                        <button class="submit-button" id="submitSignup">Save User</button>
                     </form>
                 </div>
             </div>
 
+            <!-- Edit User Modal -->
+            <div id="editUserModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeEditUserModal()">&times;</span>
+                    <h3>Edit User</h3>
+                    <br>
+                    <div id="editUserMessage" class="messageDiv"></div>
+                    <form action="" id="editUserForm">
+                        <label for="editUserName">Name</label>
+                        <input type="text" id="editUserName" required>
+                        <label for="editUserPhone">Phone</label>
+                        <input type="text" id="editUserPhone" required required pattern="0[9][0-9]{9}" maxlength="11">
+                        <label for="editUserRole">Role Number(63+)</label>
+                        <select id="editUserRole" required>
+                            <option value="customer">Customer</option>
+                            <option value="barber">Barber</option>
+                            <option value="admin">Admin</option>
+                            <option value="admin,barber">Admin Barber</option>
+                        </select>
+                        <br>
+                        <br>
+                        <button class="submit-button" id="submitEditUser">Update User</button>
+                    </form>
+                </div>
+            </div>
+            
             <!-- User List Table -->
             <table class="user-table">
                 <thead>
@@ -521,17 +545,17 @@
 
     <!--=============== ADMIN JS ===============-->
     <script src="admin-script.js"></script>
-    <script src="overview-script.js"></script>
-    <script src="user_management-script.js"></script>
-    <script type="module" src="user_management-database.js"></script>
-    <script src="appointment_management-script.js"></script>
-    <script src="queue_management-script.js"></script>
-    <script src="service_management-script.js"></script>
-    <script type="module" src="service_management-database.js"></script>
-    <script src="review_moderation-script.js"></script>
-    <script src="reports_analytics-script.js"></script>
-    <script src="notification_management-script.js"></script>
-    <script src="system_settings-script.js"></script>
-    <script src="security_backups-script.js"></script>
+    <script src="Overview Components/overview-script.js"></script>
+    <script src="User Management Components/user_management-script.js"></script>
+    <script type="module" src="User Management Components/user_management-database.js"></script>
+    <script src="Appointment Management Components/appointment_management-script.js"></script>
+    <script src="Queue Management Components/queue_management-script.js"></script>
+    <script src="Service Management Components/service_management-script.js"></script>
+    <script type="module" src="Service Management Components/service_management-database.js"></script>
+    <script src="Review Moderation Components/review_moderation-script.js"></script>
+    <script src="Reports Analytics Components/reports_analytics-script.js"></script>
+    <script src="Notification Management Components/notification_management-script.js"></script>
+    <script src="System Settings Components/system_settings-script.js"></script>
+    <script src="Security Backups Components/security_backups-script.js"></script>
 </body>
 </html>

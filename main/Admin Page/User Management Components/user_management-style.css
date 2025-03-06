@@ -185,7 +185,7 @@
     text-decoration: underline;
 }
 
-.signup-button{
+.submit-button{
     width: 100%;
     padding: 14px;
     font-family: 'Roboto Mono', monospace;
@@ -194,10 +194,9 @@
     font-size: 90%;
     font-weight: bold;
     cursor: pointer;
-    margin-bottom: 2rem;
 }
 
-.signup-button:hover{
+.submit-button:hover{
     transition: .5s;
     background-color: black;
     color: white;
@@ -242,6 +241,7 @@
 }
 
 .messageDiv{
+    display: none; /* Initially hidden */
     position: fixed; /* Keeps it on top of everything */
     top: 20px; /* Adjust to desired vertical position */
     left: 50%; /* Centers it horizontally */
@@ -252,13 +252,9 @@
     border-radius: 10px;
     font-size: 15px;
     text-align: center;
-    opacity: 1;
+    opacity: 0; /* Initially transparent */
     z-index: 1000; /* Ensures it stays above other elements */
-    animation: fadeOut 7s forwards;
+    transition: opacity 1s; /* Smooth fade out */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
-
-    /*white-space: nowrap; /* Prevents text from wrapping */
-    overflow: hidden; /* Hides overflow text */
-    /*text-overflow: ellipsis;  Adds "..." if the text is too long */
     max-width: 80%; /* Ensures it doesn't stretch too much */
 }
