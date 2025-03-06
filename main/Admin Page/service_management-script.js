@@ -1,5 +1,3 @@
-
-
 function openAddServiceModal() {
     document.getElementById("addServiceModal").style.display = "block";
 }
@@ -10,4 +8,3 @@ function closeAddServiceModal() {
 function closeEditModal() {
     document.getElementById("editServiceModal").style.display = "none";
 }
-

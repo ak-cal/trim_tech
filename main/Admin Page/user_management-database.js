@@ -23,15 +23,12 @@ function showMessage(message, divId) {
 const signUp = document.getElementById('submitSignup');
 signUp.addEventListener('click', async (event) => {
   event.preventDefault();
-  console.log("Signup clicked");
 
   const name = document.getElementById('rName').value;
   const email = document.getElementById('rEmail').value;
   const phone = document.getElementById('signup-phone').value;
   const password = document.getElementById('signup-password').value;
   const role = document.getElementById('signup-role').value;
-
-  console.log("Phone input:", phone);
 
   try {
     const { data, error } = await supabase.auth.signUp({
