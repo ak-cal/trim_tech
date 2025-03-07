@@ -103,7 +103,7 @@
                 <input type="text" id="searchUser" placeholder="Search by name or email..." onkeyup="filterUsers()">
                 <select id="filterRole" onchange="filterUsers()">
                     <option value="">All Roles</option>
-                    <option value="customer">Client</option>
+                    <option value="customer">Customer</option>
                     <option value="barber">Barber</option>
                     <option value="admin">Admin</option>
                 </select>
@@ -214,6 +214,13 @@
                     <!-- Users will be dynamically loaded here -->
                 </tbody>
             </table>
+            <br>
+            <!-- Add this after the user table -->
+            <div class="pagination-controls">
+                <button id="prevPage">Previous</button>
+                <span id="pagination">Page 1 of 1</span>
+                <button id="nextPage">Next</button>
+            </div>
         </div>
 
         <div class="main-appointment_management">
