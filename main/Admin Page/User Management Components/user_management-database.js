@@ -77,12 +77,35 @@ document.getElementById('submitSignup').addEventListener('click', async (event) 
 
     console.log("Added User Successfully");
     showMessage("Added User  Successfully", "signUpMessage");
+    fetchUsers(); // Refresh the table
     document.getElementById('addUserModal').style.display = 'none';
   } catch (error) {
     console.error("Error during adding: ", error.message);
     showMessage("Unable to create User: " + error.message, "signUpMessage");
   }
 });
+
+// Update User
+async function updateUser(user_id, name, phone, role) {
+  const { data, error } = await supabase
+      .from('Users')
+      .update({
+        name,
+        phone,
+        role
+      })
+      .eq('user_id', user_id)
+      .select();
+
+  if (error) {
+      console.error("Error updating user:", error);
+      return;
+  }
+
+  console.log("User updated:", data);
+  await fetchUsers(); // Refresh the table
+  document.getElementById('editUserModal').style.display = 'none';
+}
 
 // Edit User
 window.editUser = async function(email) {
@@ -106,6 +129,7 @@ window.editUser = async function(email) {
 
   console.log("User found: ", data);
 
+  const user_id = data.user_id;
   document.getElementById('editUserName').value = data.name;
   document.getElementById('editUserPhone').value = data.phone;
   document.getElementById('editUserRole').value = data.role;
@@ -120,29 +144,10 @@ window.editUser = async function(email) {
     const phone = document.getElementById('editUserPhone').value;
     const role = document.getElementById('editUserRole').value;
 
-    try {
-      const { data, error } = await supabase
-          .from('Users')
-          .update({
-            name: name,
-            phone: phone,
-            role: role
-          })
-          .eq('email', email);
+    console.log("Updating user: ", user_id, name, phone, role);
 
-      if (error) throw error;
-
-      console.log("User updated:", data);
-
-      console.log("Updated User Successfully");
-      showMessage("Updated User Successfully", "editUserMessage");
-      fetchUsers(); // Refresh the table
-      document.getElementById('editUserModal').style.display = 'none';
-    } catch (error) {
-      console.error("Error during updating: ", error.message);
-      showMessage("Unable to update User: " + error.message, "editUserMessage");
-    }
-  };
+    await updateUser(user_id, name, phone, role);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", fetchUsers);
