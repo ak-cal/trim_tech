@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trim Tech - Booking</title>
     <link rel="stylesheet" href="../main.css">
-
-
-    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,14 +16,14 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            
+            margin-top: 5%;
         }
 
         .container {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 800px;
             padding: 20px;
         }
 
@@ -54,11 +51,7 @@
             background-color: #ddd;
         }
 
-        .calendar .today {
-            background-color: #d2bb85;
-            color: white;
-        }
-
+        .calendar .today,
         .calendar .selected {
             background-color: #d2bb85;
             color: white;
@@ -95,36 +88,31 @@
             background-color: #2a2823;
         }
 
-        .success-message {
-            color: green;
-            text-align: center;
-        }
-
-        .error-message {
-            color: red;
-            text-align: center;
-        }
-
         .message {
             text-align: center;
             margin-top: 20px;
         }
+
+        .success-message {
+            color: green;
+        }
+
+        .error-message {
+            color: red;
+        }
+        
     </style>
 </head>
 
 <body>
     <div class="container">
         <h1>Book Your Appointment</h1>
-
-        <!-- Calendar -->
         <div id="calendar" class="calendar"></div>
 
-        <!-- Appointment form -->
         <div class="input-group">
             <label for="time">Choose Time</label>
             <select id="time" required>
                 <option value="">Select Time</option>
-                <!-- Options for 30-minute intervals -->
                 <option value="09:00">09:00</option>
                 <option value="09:30">09:30</option>
                 <option value="10:00">10:00</option>
@@ -145,165 +133,133 @@
                 <option value="17:30">17:30</option>
             </select>
 
-            <label for="barber">Choose Barber</label>
-            <select id="barber" required>
-                <option value="">Select Barber</option>
-                <option value="John">John</option>
-                <option value="Jane">Jane</option>
-                <option value="Alex">Alex</option>
-                <option value="Anyone Available">Anyone Available</option>
-            </select>
-
-            <label for="service">Choose Service</label>
-            <select id="service" required>
+            <label for="barber">Choose Barber Service</label>
+            <select id="barber_service" required>
                 <option value="">Select Service</option>
-                <option value="Haircut">Haircut</option>
-                <option value="Shave">Shave</option>
-                <option value="Massage">Massage</option>
-                <option value="Beard Trim">Beard Trim</option>
+                    <option value="579995e0-3806-4359-8c56-5f0e908a7531">Shave & Trim</option>
+                    <option value="5dcac75a-fac2-44b6-afae-ba718752458b">Hairsalon</option>
+                    <option value="9991718c-1f01-4f72-a63a-198d25d60f32">Massage (15 min)</option>
+                    <option value="aaaf006c-154e-4013-ba88-2f56068fe1e1">Massage (30 min)</option>
+                    <option value="afeed2e6-cdfc-4578-8166-9de6a8a9083d">Haircut</option>
+                    <option value="ca7d4819-aab1-49d6-af38-4114d8489043">Shave</option>
+                    <option value="d8a050f2-6456-4ccd-b343-47e06fdb868f">Shampoo & Blow Dry</option>
+                    <option value="db028ce2-a8ab-4ddc-ac1d-b66ce8578685">Hair Art</option>
+                
             </select>
-
+            
+            <label for="branches">Choose Branch</label>
+            <select id="branches" required>
+            <option value="">Select Branch</option>
+            <option value="8d5b1c5a-2a3e-4f7c-89e1-9d6a0f7b3c4d">Alabang</option>
+        </select>
+            <label for="branches_choose">Choose Barber</label>
+            <select id="barber_choose" required>
+            <option value="">Barber</option>
+            <option value="b0844e72-bd9c-44a9-a4d9-74b2d50d221f">John</option>
+        </select>
+            
+        </select>
+                    
             <button id="bookBtn">Book Appointment</button>
+            <button id="exitBtn">Exit</button>
         </div>
-
         <div id="message" class="message"></div>
     </div>
 
+
+
     <script type="module">
-        
         import { createClient } from "https://cdn.skypack.dev/@supabase/supabase-js";
 
-        // Initialize Supabase client
         const supabaseUrl = "https://dcyaytjualtuwvantpek.supabase.co";
-        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRjeWF5dGp1YWx0dXd2YW50cGVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyMDU2NjksImV4cCI6MjA1NTc4MTY2OX0.RDsVndAUGJfQN90Ezg_xxoHF-506ST66e7cSzuQ26jM";
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRjeWF5dGp1YWx0dXd2YW50cGVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyMDU2NjksImV4cCI6MjA1NTc4MTY2OX0.RDsVndAUGJfQN90Ezg_xxoHF-506ST66e7cSzuQ26jM"; // Replace with environment-safe key
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // Get today's date for the calendar view
-        const today = new Date();
-        let selectedDate = null; // Variable to store the selected date
+        let selectedDate = null;
 
-        // Function to display the calendar
+        async function getUserId() {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (error) {
+                console.error("Error getting user:", error);
+                return null;
+            }
+            return user ? user.id : null;
+        }
+
         function generateCalendar(month, year) {
             const calendarDiv = document.getElementById("calendar");
-            calendarDiv.innerHTML = ""; // Clear the calendar
-
-            // Get the first day of the month and the number of days in the month
+            calendarDiv.innerHTML = "";
             const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const daysInMonth = lastDay.getDate();
-
-            // Get the day of the week for the 1st day of the month
-            const startingDay = firstDay.getDay();
-
-            // Days of the week
-            const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-            // Create the header for the calendar
-            daysOfWeek.forEach(day => {
-                const dayElement = document.createElement("div");
-                dayElement.textContent = day;
-                calendarDiv.appendChild(dayElement);
-            });
-
-            // Create blank spaces for the days before the 1st of the month
-            for (let i = 0; i < startingDay; i++) {
-                const emptyDiv = document.createElement("div");
-                calendarDiv.appendChild(emptyDiv);
-            }
-
-            // Generate the calendar days
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
             for (let i = 1; i <= daysInMonth; i++) {
                 const dayDiv = document.createElement("div");
                 dayDiv.textContent = i;
                 dayDiv.addEventListener("click", () => {
-                    selectedDate = new Date(year, month, i); // Set selected date
+                    selectedDate = new Date(year, month, i);
                     highlightSelectedDate();
                 });
-
-                // Highlight today's date
-                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                    dayDiv.classList.add("today");
-                }
-
-                // Highlight selected date
-                if (selectedDate && i === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) {
-                    dayDiv.classList.add("selected");
-                }
-
                 calendarDiv.appendChild(dayDiv);
             }
         }
 
-        // Function to highlight the selected date
         function highlightSelectedDate() {
-            const calendarDiv = document.getElementById("calendar");
-            const allDays = calendarDiv.querySelectorAll("div");
-            allDays.forEach(day => day.classList.remove("selected"));
-            const selectedDay = Array.from(allDays).find(day => day.textContent == selectedDate.getDate());
-            if (selectedDay) {
-                selectedDay.classList.add("selected");
-            }
+            document.querySelectorAll(".calendar div").forEach(div => div.classList.remove("selected"));
+            document.querySelector(`.calendar div:nth-child(${selectedDate.getDate()})`).classList.add("selected");
         }
 
-        // Generate the calendar for the current month
+        document.getElementById("bookBtn").addEventListener("click", async () => {
+    const userId = await getUserId();
+    if (!userId) {
+        document.getElementById("message").innerHTML = "<p class='error-message'>Please log in first!</p>";
+        return;
+    }
+
+    if (!selectedDate) {
+        document.getElementById("message").innerHTML = "<p class='error-message'>Please select a date!</p>";
+        return;
+    }
+
+    const time = document.getElementById("time").value;
+    const serviceId = document.getElementById("barber_service").value;
+    const branchId = document.getElementById("branches").value;
+    const barberId = document.getElementById("barber_choose").value; // ✅ Retrieve barber_id
+
+    if (!time || !serviceId || !barberId) {
+        document.getElementById("message").innerHTML = "<p class='error-message'>Please select time, service, and barber.</p>";
+        return;
+    }
+
+    const appointmentType = serviceId; // Assuming service is the appointment type
+
+    const { data, error } = await supabase.from("Appointments").insert([{
+        customer_id: userId,  
+        service_id: serviceId,
+        branch_id: branchId,
+        barber_id: barberId,  // ✅ FIX: Include barber_id
+        appointment_type: appointmentType,
+        date: selectedDate.toISOString().split('T')[0],
+        time: time,
+        status: "pending",
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+    }]);
+
+    document.getElementById("message").innerHTML = error 
+        ? `<p class='error-message'>${error.message}</p>` 
+        : "<p class='success-message'>Appointment booked successfully!</p>";
+});
+
+
+        const today = new Date();
         generateCalendar(today.getMonth(), today.getFullYear());
 
-        // Handle booking submission
-        document.getElementById("bookBtn").addEventListener("click", async () => {
-                if (!selectedDate) {
-                    document.getElementById("message").innerHTML = "<p class='error-message'>Please select a date!</p>";
-                    return;
-                }
+        document.getElementById("exitBtn").addEventListener("click", () => {
+    window.location.href = "../Home Page/homepage.html";
+});
 
-                const time = document.getElementById("time").value;
-                const barber = document.getElementById("barber").value;
-                const service = document.getElementById("service").value;
 
-                if (!time || !barber || !service) {
-                    document.getElementById("message").innerHTML = "<p class='error-message'>Please select time, barber, and service.</p>";
-                    return;
-                }
+        
 
-                try {
-                    // Check if the selected time slot is already booked
-                    const { data: existingAppointments, error: fetchError } = await supabase
-                        .from("appointments")
-                        .select("*")
-                        .eq("barber", barber)
-                        .eq("date", selectedDate.toISOString().split('T')[0])
-                        .eq("time", time);
-
-                    if (fetchError) {
-                        throw new Error(fetchError.message);
-                    }
-
-                    // If a matching appointment is found, prevent booking
-                    if (existingAppointments.length > 0) {
-                        document.getElementById("message").innerHTML = "<p class='error-message'>This time slot is already booked. Please choose another time.</p>";
-                        return;
-                    }
-
-                    // Insert booking data into Supabase
-                    const { data, error } = await supabase
-                        .from("appointments")
-                        .insert([{
-                            barber: barber,
-                            date: selectedDate.toISOString().split('T')[0],
-                            time: time,
-                            service: service,
-                            created_at: new Date()
-                        }]);
-
-                    if (error) {
-                        throw new Error(error.message);
-                    }
-
-                    document.getElementById("message").innerHTML = "<p class='success-message'>Your appointment has been booked!</p>";
-                } catch (error) {
-                    console.error("Error inserting data: ", error);
-                    document.getElementById("message").innerHTML = "<p class='error-message'>Something went wrong. Please try again.</p>";
-                }
-            });
     </script>
 </body>
 

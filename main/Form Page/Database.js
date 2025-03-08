@@ -80,7 +80,9 @@ signIn.addEventListener('click', async (event) => {
     if (error) throw error;
 
     showMessage("User Logged In Successfully", "signInMessage");
-    window.location.href = "homepage.html";
+
+    // Redirect to booking page instead of homepage
+    window.location.href = "../Home Page/homepage.html"; 
   } catch (error) {
     console.error("Login Error: ", error.message);
     if (error.message.includes("Invalid login credentials")) {
