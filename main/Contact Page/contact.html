@@ -10,7 +10,9 @@
             <!--=============== CSS ===============-->
             <link rel="stylesheet" href="contact-style.css">
             <link rel="stylesheet" href="../main.css">
-        
+    
+            <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 
             <title>Contact</title>
         </head>
@@ -40,15 +42,15 @@
         <div class="container">
             <h1 class="contact_title">Contact Us</h1>
             <h3 class="contact_sub">How can we help? We're all ears!</h3>
-            <div class="contact-form">
-                <form method="post" action="mailto:federalbarber123@gmail.com" autocomplete="on">
+            <div class="contact-form-container">
+                <form id="contact-form">
                     <fieldset class="input_box">
                         <div class="contact_input">
                             <div class="input_flex">
-                                <input type="text" maxlength="80" placeholder="Name">
-                                <input type="email" maxlength="80" placeholder="Email Address">
+                                <input type="text" id="name" name="name" maxlength="80" placeholder="Name" required>
+                                <input type="email" id="email" name="email" maxlength="80" placeholder="Email Address" required>
                             </div>
-                            <textarea rows="5" placeholder="Comment"></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit">SEND</button>
                     </fieldset>
