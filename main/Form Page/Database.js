@@ -30,8 +30,6 @@ signUp.addEventListener('click', async (event) => {
   const phone = document.getElementById('signup-phone').value;
   const password = document.getElementById('signup-password').value;
 
-  console.log("Phone input:", phone);
-
   try {
     // Proceed with signup
     const { data, error } = await supabase.auth.signUp({
@@ -82,7 +80,9 @@ signIn.addEventListener('click', async (event) => {
     if (error) throw error;
 
     showMessage("User Logged In Successfully", "signInMessage");
-    window.location.href = "../Home Page/homepage.html";
+
+    // Redirect to booking page instead of homepage
+    window.location.href = "../Home Page/homepage.html"; 
   } catch (error) {
     console.error("Login Error: ", error.message);
     if (error.message.includes("Invalid login credentials")) {
