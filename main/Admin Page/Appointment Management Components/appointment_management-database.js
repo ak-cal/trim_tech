@@ -66,7 +66,7 @@ async function displayAppointments(data) {
                 <td>${appointment.appointment_type}</td>
                 <td>${appointment.status}</td>
                 <td>
-                    <button class="btn btn-edit" onclick="editAppointment('${appointment.appointment_id}')">Edit</button>
+                    <button class="btn btn-add" onclick="editAppointment('${appointment.appointment_id}')">Edit</button>
                 </td>
             </tr>
         `;
@@ -83,7 +83,7 @@ async function fetchAndDisplayOptions() {
             .select('barber_id, Staff(Users(name))');
         if (barbersError) throw barbersError;
 
-        const barberSelect = document.getElementById('appointmentBarberName');
+        const barberSelect = document.getElementById('addAppointmentBarberName');
         barberSelect.innerHTML = '<option value="">Select Barber</option>';
         barbers.forEach(barber => {
             const option = document.createElement('option');
@@ -98,7 +98,7 @@ async function fetchAndDisplayOptions() {
             .select('service_id, name');
         if (servicesError) throw servicesError;
 
-        const serviceSelect = document.getElementById('appointmentServiceName');
+        const serviceSelect = document.getElementById('addAppointmentServiceName');
         serviceSelect.innerHTML = '<option value="">Select Service</option>';
         services.forEach(service => {
             const option = document.createElement('option');
@@ -113,7 +113,7 @@ async function fetchAndDisplayOptions() {
             .select('branch_id, name');
         if (branchesError) throw branchesError;
 
-        const branchSelect = document.getElementById('appointmentBranchName');
+        const branchSelect = document.getElementById('addAppointmentBranchName');
         branchSelect.innerHTML = '<option value="">Select Branch</option>';
         branches.forEach(branch => {
             const option = document.createElement('option');
@@ -185,5 +185,59 @@ document.getElementById('submitAddAppointment').addEventListener('click', async 
     }
 });
 
-document.addEventListener("DOMContentLoaded", fetchAppointments);
+// Edit Appointments
+window.editAppointment = async function(appointment_id) {
+    console.log("Edit Appointment clicked");
+
+    const { data, error } = await supabase
+        .from('Appointments')
+        .select('status')
+        .eq('appointment_id', appointment_id)
+        .single();
+    
+    if (error) {
+        console.error("Error fetching appointment:", error);
+        return;
+    }
+
+    if (!data) {
+        console.error("Appointment not found!");
+        return;
+    }
+
+    console.log("Appointment data:", data);
+
+    document.getElementById('editAppointmentStatus').value = data.status;
+
+    openEditAppointmentModal();
+
+    document.getElementById('submitEditAppointment').onclick = async function(event) {
+        event.preventDefault();
+        console.log("Update Appointment clicked");
+
+        const status = document.getElementById('editAppointmentStatus').value;
+
+        try {
+            const { data, error } = await supabase
+                .from('Appointments')
+                .update({ status })
+                .eq('appointment_id', appointment_id);
+
+            if (error) {
+                console.error("Error updating appointment:", error);
+                showMessage("Error updating appointment", "editAppointmentMessage");
+                return;
+            }
+
+            showMessage("Appointment updated successfully", "editAppointmentMessage");
+            fetchAppointments();
+            closeEditAppointmentModal();
+        } catch (error) {
+            console.error("Error updating appointment:", error.message);
+            showMessage("Error updating appointment", "editAppointmentMessage");
+        }
+    }
+}
+    
+document.addEventListener('DOMContentLoaded', fetchAppointments);
 document.addEventListener('DOMContentLoaded', fetchAndDisplayOptions);

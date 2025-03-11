@@ -254,32 +254,32 @@
                     <h3>Add New Appointment</h3>
                     <div id="addAppointmentMessage" class="messageDiv"></div>
                     <form id="addAppointmentForm" class="addAppointmentForm">
-                        <label for="appointmentCustomerEmail">Customer Email:</label>
-                        <input type="email" id="appointmentCustomerEmail" required>
+                        <label for="addAppointmentCustomerEmail">Customer Email:</label>
+                        <input type="email" id="addAppointmentCustomerEmail" required>
             
-                        <label for="appointmentBarberName">Barber:</label>
-                        <select id="appointmentBarberName" required>
+                        <label for="addAppointmentBarberName">Barber:</label>
+                        <select id="addAppointmentBarberName" required>
                             <option value="">Select Barber</option>
                             <!-- Barbers will be dynamically inserted here -->
                         </select>
 
-                        <label for="appointmentServiceName">Service:</label>
-                        <select id="appointmentServiceName" required>
+                        <label for="addAppointmentServiceName">Service:</label>
+                        <select id="addAppointmentServiceName" required>
                             <option value="">Select Service</option>
                             <!-- Services will be dynamically inserted here -->
                         </select>
 
-                        <label for="appointmentBranchName">Branch:</label>
-                        <select id="appointmentBranchName" required>
+                        <label for="addAppointmentBranchName">Branch:</label>
+                        <select id="addAppointmentBranchName" required>
                             <option value="">Select Branch</option>
                             <!-- Branches will be dynamically inserted here -->
                         </select>
             
-                        <label for="appointmentDate">Date:</label>
-                        <input type="date" id="appointmentDate" required>
+                        <label for="addAppointmentDate">Date:</label>
+                        <input type="date" id="addAppointmentDate" required>
             
-                        <label for="appointmentTime">Time:</label>
-                        <select type="time" id="appointmentTime" required>
+                        <label for="addAppointmentTime">Time:</label>
+                        <select type="time" id="addAppointmentTime" required>
                             <option value="">Select Time</option>
                             <option value="09:00">09:00</option>
                             <option value="09:30">09:30</option>
@@ -301,14 +301,35 @@
                             <option value="17:30">17:30</option>
                         </select>
 
-                        <label for="appointmentType">Appointment Type:</label>
-                        <select id="appointmentType" required>
+                        <label for="addAppointmentType">Appointment Type:</label>
+                        <select id="addAppointmentType" required>
                             <option value="">Select Type</option>
                             <option value="Walk-in">Walk-in</option>
                             <option value="Booking">Booking</option>
                         </select>
 
                         <button class="submit-button" id="submitAddAppointment">Add Appointment</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Edit Appointment Modal -->
+            <div id="editAppointmentModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeEditAppointmentModal()">&times;</span>
+                    <h3>Edit Appointment</h3>
+                    <div id="editAppointmentMessage" class="messageDiv"></div>
+                    <form id="editAppointmentForm">
+                        <label for="editAppointmentStatus">Status:</label>
+                        <select id="editAppointmentStatus" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Completed">Completed</option>
+                            <option value="No Show">No Show</option>
+                        </select>
+
+                        <button class="submit-button" id="submitEditAppointment">Update Appointment</button>
                     </form>
                 </div>
             </div>
