@@ -226,15 +226,18 @@
         <div class="main-appointment_management">
             <h2>Appointment Management</h2>
         
-            <button class="btn-add" onclick="openAddAppointmentModal()">+ Add Appointment</button>
+            <button id="addAppointmentButton" class="btn-add" onclick="openAddAppointmentModal()">+ Add Appointment</button>
         
             <table class="appointment-table">
                 <thead>
                     <tr>
-                        <th>Client</th>
+                        <th>Customer</th>
                         <th>Barber</th>
+                        <th>Service</th>
+                        <th>Branch</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Appointment Type</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -249,24 +252,62 @@
                 <div class="modal-content">
                     <span class="close" onclick="closeAddAppointmentModal()">&times;</span>
                     <h3>Add New Appointment</h3>
-                    <form id="addAppointmentForm">
-                        <label for="clientName">Client Name:</label>
-                        <input type="text" id="clientName" required>
+                    <form id="addAppointmentForm" class="addAppointmentForm">
+                        <label for="appointmentCustomerEmail">Customer Email:</label>
+                        <input type="email" id="appointmentCustomerEmail" required>
             
-                        <label for="barberName">Barber:</label>
-                        <select id="barberName" required>
-                            <option value="Mike">Mike</option>
-                            <option value="David">David</option>
-                            <option value="Chris">Chris</option>
+                        <label for="appointmentBarberName">Barber:</label>
+                        <select id="appointmentBarberName" required>
+                            <option value="">Select Barber</option>
+                            <!-- Barbers will be dynamically inserted here -->
+                        </select>
+
+                        <label for="appointmentServiceName">Service:</label>
+                        <select id="appointmentServiceName" required>
+                            <option value="">Select Service</option>
+                            <!-- Services will be dynamically inserted here -->
+                        </select>
+
+                        <label for="appointmentBranchName">Branch:</label>
+                        <select id="appointmentBranchName" required>
+                            <option value="">Select Branch</option>
+                            <!-- Branches will be dynamically inserted here -->
+                        </select>
+
+                        <label for="appointmentType">Appointment Type:</label>
+                        <select id="appointmentType" required>
+                            <option value="">Select Type</option>
+                            <option value="Walk-in">Walk-in</option>
+                            <option value="Booking">Booking</option>
                         </select>
             
                         <label for="appointmentDate">Date:</label>
                         <input type="date" id="appointmentDate" required>
             
                         <label for="appointmentTime">Time:</label>
-                        <input type="time" id="appointmentTime" required>
+                        <select type="time" id="appointmentTime" required>
+                            <option value="">Select Time</option>
+                            <option value="09:00">09:00</option>
+                            <option value="09:30">09:30</option>
+                            <option value="10:00">10:00</option>
+                            <option value="10:30">10:30</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:30">15:30</option>
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                        </select>
             
-                        <button type="submit">Add Appointment</button>
+                        <button class="submit-button" id="submitAddAppointment">Add Appointment</button>
                     </form>
                 </div>
             </div>
@@ -556,6 +597,7 @@
     <script src="User Management Components/user_management-script.js"></script>
     <script type="module" src="User Management Components/user_management-database.js"></script>
     <script src="Appointment Management Components/appointment_management-script.js"></script>
+    <script type="module" src="Appointment Management Components/appointment_management-database.js"></script>
     <script src="Queue Management Components/queue_management-script.js"></script>
     <script src="Service Management Components/service_management-script.js"></script>
     <script type="module" src="Service Management Components/service_management-database.js"></script>
