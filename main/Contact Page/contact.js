@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Initialize EmailJS
 document.addEventListener("DOMContentLoaded", function () {
     // Initialize EmailJS
-    emailjs.init("oi_a-jIG1rtncbrqX"); 
+    emailjs.init("5ubOvuijaJO2rgh0M"); 
 
     document.getElementById("contact-form").addEventListener("submit", function (event) {
         event.preventDefault(); 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const message = document.getElementById("message").value;
 
         // Send email using EmailJS
-        emailjs.send("service_o3xk8d2", "template_xv4h8rj", {
+        emailjs.send("service_u87lcgg", "template_f3q5voq", {
             name: name,
             email: email,
             message: message
