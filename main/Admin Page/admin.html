@@ -252,6 +252,7 @@
                 <div class="modal-content">
                     <span class="close" onclick="closeAddAppointmentModal()">&times;</span>
                     <h3>Add New Appointment</h3>
+                    <div id="addAppointmentMessage" class="messageDiv"></div>
                     <form id="addAppointmentForm" class="addAppointmentForm">
                         <label for="appointmentCustomerEmail">Customer Email:</label>
                         <input type="email" id="appointmentCustomerEmail" required>
@@ -272,13 +273,6 @@
                         <select id="appointmentBranchName" required>
                             <option value="">Select Branch</option>
                             <!-- Branches will be dynamically inserted here -->
-                        </select>
-
-                        <label for="appointmentType">Appointment Type:</label>
-                        <select id="appointmentType" required>
-                            <option value="">Select Type</option>
-                            <option value="Walk-in">Walk-in</option>
-                            <option value="Booking">Booking</option>
                         </select>
             
                         <label for="appointmentDate">Date:</label>
@@ -306,7 +300,14 @@
                             <option value="17:00">17:00</option>
                             <option value="17:30">17:30</option>
                         </select>
-            
+
+                        <label for="appointmentType">Appointment Type:</label>
+                        <select id="appointmentType" required>
+                            <option value="">Select Type</option>
+                            <option value="Walk-in">Walk-in</option>
+                            <option value="Booking">Booking</option>
+                        </select>
+
                         <button class="submit-button" id="submitAddAppointment">Add Appointment</button>
                     </form>
                 </div>
