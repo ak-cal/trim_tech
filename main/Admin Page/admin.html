@@ -225,6 +225,19 @@
 
         <div class="main-appointment_management">
             <h2>Appointment Management</h2>
+
+            <!-- Search & Filter -->
+            <div class="appointment-search">
+                <input type="text" id="searchAppointment" placeholder="Search..." onkeyup="filterAppointments()">
+                <select id="filterStatus" onchange="filterAppointments()">
+                    <option value="">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Completed">Completed</option>
+                    <option value="No Show">No Show</option>
+                </select>
+            </div>
         
             <button id="addAppointmentButton" class="btn-add" onclick="openAddAppointmentModal()">+ Add Appointment</button>
         
