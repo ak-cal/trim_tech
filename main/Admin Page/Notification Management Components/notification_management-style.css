@@ -63,3 +63,7 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.display_flex{
+    display: flex;
+    text-align:center;
+}

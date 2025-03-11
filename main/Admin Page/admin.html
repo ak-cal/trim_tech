@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="Notification Management Components/notification_management-style.css">
     <link rel="stylesheet" href="System Settings Components/system_settings-style.css">
     <link rel="stylesheet" href="Security Backups Components/security_backups-style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <title>Admin Dashboard</title>
 </head>
@@ -505,16 +507,26 @@
             <h2>Notification Management</h2>
         
             <div class="notification-form">
-                <label for="recipientType">Recipient Type:</label>
-                <select id="recipientType">
-                    <option value="client">Clients</option>
-                    <option value="barber">Barbers</option>
-                </select>
-        
-                <label for="notificationMessage">Message:</label>
-                <textarea id="notificationMessage" rows="3" placeholder="Enter notification message"></textarea>
-        
-                <button onclick="sendNotification()">Send Notification</button>
+                <form id="notification-form">
+                    <label for="recipientType">Recipient Type:</label>
+                    <select id="recipientType">
+                        <option id="client" value="client">Clients</option>
+                        <option id="barber" value="barber">Barbers</option>
+                    </select>
+                    <label for="statusType">Status:</label>
+                    <select id="statusType">
+                        <option id="confirmed" value="confirmed">Confirmed</option>
+                        <option id="cancelled" value="cancelled">Cancelled</option>
+                        <option id="rescheduled" value="rescheduled">Rescheduled</option>
+                    </select>
+                    <input type="email" id="user_email" name="email" maxlength="80" placeholder="Email Address" required>
+                    
+            
+                    <label for="notificationMessage">Message:</label>
+                    <textarea id="notificationMessage" rows="3" placeholder="Enter notification message"></textarea>
+            
+                    <button type="submit">Send Notification</button>
+                </form>
             </div>
         
             <h3>Sent Notifications</h3>
