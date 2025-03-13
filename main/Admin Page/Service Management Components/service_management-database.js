@@ -26,11 +26,12 @@ async function fetchServices() {
                 <td>${service.description}</td>
                 <td>Php ${service.price.toFixed(2)}</td>
                 <td>
-                    <button class="btn-delete" onclick="editService('${service.service_id}', '${service.name}', '${service.description}', ${service.price})">Edit</button>
+                    <button class="btn-delete" onclick="editService('${service.service_id}', '${service.name.replace(/'/g, "\\'").replace(/\n/g, " ")}', '${service.description.replace(/'/g, "\\'").replace(/\n/g, " ")}', ${service.price})">Edit</button>
                     <button class="btn-delete" onclick="deleteService('${service.service_id}')">Delete</button>
                 </td>
             </tr>
         `;
+    
         tableBody.innerHTML += row;
     });
 }
@@ -175,7 +176,10 @@ async function fetchReviews() {
 }
 
 window.deleteFeedback = async function(reviewId) {
+    console.log("Attempting to delete review with ID:", reviewId);
+
     if (confirm("Are you sure you want to delete this review?")) {
+
         try {
             const { error } = await supabase
                 .from('Reviews')
