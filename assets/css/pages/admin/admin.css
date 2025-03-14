@@ -8,6 +8,10 @@ body {
     background-color: #f4f4f4;
 }
 
+.navbar {
+    position: fixed;
+}
+
 .main {
     margin-left: 320px;
     padding: 100px 20px 20px 20px;

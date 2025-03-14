@@ -8,6 +8,18 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/global/reset.css">
+    <link rel="stylesheet" href="assets/css/global/styles.css">
+    <link rel="stylesheet" href="assets/css/components/navbar.css">
+    <link rel="stylesheet" href="assets/css/components/sidebar.css">
+    <link rel="stylesheet" href="assets/css/components/card.css">
+    <link rel="stylesheet" href="assets/css/components/search.css">
+    <link rel="stylesheet" href="assets/css/components/button.css">
+    <link rel="stylesheet" href="assets/css/components/table.css">
+    <link rel="stylesheet" href="assets/css/components/pagination.css">
+    <link rel="stylesheet" href="assets/css/components/modal.css">
+    <link rel="stylesheet" href="assets/css/components/form.css">
+    <link rel="stylesheet" href="assets/css/components/message.css">
     <link rel="stylesheet" href="assets/css/pages/admin/admin.css">
     <link rel="stylesheet" href="assets/css/pages/admin/overview/overview.css">
     <link rel="stylesheet" href="assets/css/pages/admin/user management/user_management.css">
@@ -23,20 +35,19 @@
     <!--=============== EXTERNAL JS ===============-->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-    <title>Admin Dashboard</title>
+    <title>Federal Barbers - Admin Dashboard</title>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <ul class="nav-links">
-            <li class="logo"><a href="#"><img src="federalbarbers-logo.png" alt="Logo"></a></li>
-                                    
+            <li class="logo"><a href="index.html"><img src="assets/images/federalbarbers-logo.png" alt="Logo"></a></li>
+            
             <div class="nav-items">
-                <li><a href="../Booking Page/bookingpage.html">Booking</a></li>
-                <li><a href="../Service Page/servicepage.html">Services</a></li>
-                <li><a href="../About Page/about.html">About Us</a></li>
-                <li><a href="../Contact Page/contact.html">Contact Us</a></li>
-                <li><a href="../Admin Page/admin.html">Admin Dashboard</a></li>
+                <li><a href="booking.html">Booking</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </div>
 
             <div class="nav-icons">
@@ -102,7 +113,7 @@
             <h2>User Management</h2>
 
             <!-- Search & Filter -->
-            <div class="user-search">
+            <div class="search">
                 <input type="text" id="searchUser" placeholder="Search by name or email..." onkeyup="filterUsers()">
                 <select id="filterRole" onchange="filterUsers()">
                     <option value="">All Roles</option>
@@ -113,7 +124,7 @@
             </div>
 
             <!-- Add User Button -->
-            <button class="btn btn-add" onclick="openAddUserModal()" id="show-signup">+ Add User</button>
+            <button class="btn btn-add btn-blue" onclick="openAddUserModal()" id="showAddUserModal">+ Add User</button>
 
             <!-- Add User Modal -->
             <div id="addUserModal" class="modal">
@@ -121,57 +132,19 @@
                     <span class="close" onclick="closeAddUserModal()">&times;</span>
                     <h3>Add New User</h3>
                     <br>
-                    <div id="signUpMessage" class="messageDiv"></div>
-                    <form action="" class="signup-form">
-                        <div class="signup-contents">
-                            <div class="signup-box">
-                                <i class="ri-user-5-line login-icon"></i>
-                                <div class="signup-box-input">
-                                    <input type="name" class="signup-input" placeholder=" " id="rName" required>
-                                    <label for="rName" class="signup-label">Name</label>
-                                </div>
-                            </div>
-        
-                            <div class="signup-box">
-                                <i class="ri-mail-line login-icon"></i>
-                                <div class="signup-box-input">
-                                    <input type="email" class="signup-input" placeholder=" " id="rEmail" required>
-                                    <label for="rEmail" class="signup-label">Email</label>
-                                </div>
-                            </div>
-        
-                            <div class="signup-box">
-                                <i class="ri-phone-line login-icon"></i>
-                                <div class="signup-box-input">
-                                    <input type="text" class="signup-input" id="signup-phone" placeholder=" " required required pattern="0[9][0-9]{9}" maxlength="11">
-                                    <label for="signup-phone" class="signup-label">Phone Number(63+)</label>
-                                </div>
-                            </div>
-        
-                            <div class="signup-box">
-                                <i class="ri-lock-2-line"></i>
-                                <div class="signup-box-input">
-                                    <input type="password" class="signup-input" id="signup-password" placeholder=" " required>
-                                    <label for="signup-password" class="signup-label">Password</label>
-                                    <i class="ri-eye-close-line login-viewoff" id="signup-eye" ></i>
-                                </div>
-                            </div>
-
-                            <div class="signup-box">
-                                <i class="ri-user-settings-line login-icon"></i>
-                                <div class="signup-box-input">
-                                    <select id="signup-role" class="signup-input">
-                                        <option value="customer">Customer</option>
-                                        <option value="barber">Barber</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="admin,barber">Admin Barber</option>
-                                    </select>
-                                    <label for="signup-role" class="signup-label">Role</label>
+                    <div id="addUserMessage" class="message"></div>
+                    <form id="addUserForm" class="form" action="">
+                        <div class="form-contents">
+                            <div class="form-box">
+                                <i class="ri-mail-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <input type="email" class="form-input" placeholder=" " id="rEmail" required>
+                                    <label for="rEmail" class="form-label">Email</label>
                                 </div>
                             </div>
                         </div>
 
-                        <button class="submit-button" id="submitSignup">Save User</button>
+                        <button class="submit-button btn-green" id="submitAddUser">Invite User</button>
                     </form>
                 </div>
             </div>
@@ -182,28 +155,37 @@
                     <span class="close" onclick="closeEditUserModal()">&times;</span>
                     <h3>Edit User</h3>
                     <br>
-                    <div id="editUserMessage" class="messageDiv"></div>
-                    <form action="" id="editUserForm">
-                        <label for="editUserName">Name</label>
-                        <input type="text" id="editUserName" required>
-                        <label for="editUserPhone">Phone Number(63+)</label>
-                        <input type="text" id="editUserPhone" required required pattern="0[9][0-9]{9}" maxlength="11">
-                        <label for="editUserRole">Role</label>
-                        <select id="editUserRole" required>
-                            <option value="customer">Customer</option>
-                            <option value="barber">Barber</option>
-                            <option value="admin">Admin</option>
-                            <option value="admin,barber">Admin Barber</option>
-                        </select>
-                        <br>
-                        <br>
-                        <button class="submit-button" id="submitEditUser">Update User</button>
+                    <div id="editUserMessage" class="message"></div>
+                    <form id="editUserForm" class="form" action="">
+                        <div class="form-contents">
+                            <div class="form-box">
+                                <label for="editUserName" class="form-label">Name</label>
+                                <input type="text" id="editUserName" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-box">
+                                <label for="editUserPhone" class="form-label">Phone Number(63+)</label>
+                                <input type="text" id="editUserPhone" class="form-input" required required pattern="0[9][0-9]{9}" maxlength="11">
+                            </div>
+                            
+                            <div class="form-box">
+                                <label for="editUserRole" class="form-label">Role</label>
+                                <select id="editUserRole" class="form-input" required>
+                                    <option value="customer">Customer</option>
+                                    <option value="barber">Barber</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="admin,barber">Admin Barber</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="submit-button btn-green" id="submitEditUser">Update User</button>
                     </form>
                 </div>
             </div>
             
             <!-- User List Table -->
-            <table class="user-table">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -219,9 +201,9 @@
             </table>
             <br>
             <!-- Add this after the user table -->
-            <div class="pagination-controls">
+            <div class="pagination">
                 <button id="prevPage">Previous</button>
-                <span id="pagination">Page 1 of 1</span>
+                <span id="userPagination">Page 1 of 1</span>
                 <button id="nextPage">Next</button>
             </div>
         </div>
@@ -244,7 +226,7 @@
         
             <button id="addAppointmentButton" class="btn-add" onclick="openAddAppointmentModal()">+ Add Appointment</button>
         
-            <table class="appointment-table">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Customer</th>
