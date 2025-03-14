@@ -46,6 +46,6 @@ async function getSession() {
     return data;
 }
   
-  signInUser();
-  getUser();
-  getSession();
+signInUser();
+getUser();
+getSession();

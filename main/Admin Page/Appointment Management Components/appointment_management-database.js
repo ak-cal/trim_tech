@@ -131,13 +131,13 @@ document.getElementById('submitAddAppointment').addEventListener('click', async 
     event.preventDefault();
     console.log("Save Appointment clicked");
 
-    const email = document.getElementById('appointmentCustomerEmail').value;
-    const barber_id = document.getElementById('appointmentBarberName').value;
-    const service_id = document.getElementById('appointmentServiceName').value;
-    const branch_id = document.getElementById('appointmentBranchName').value;
-    const date = document.getElementById('appointmentDate').value;
-    const time = document.getElementById('appointmentTime').value;
-    const appointment_type = document.getElementById('appointmentType').value;
+    const email = document.getElementById('addAppointmentCustomerEmail').value;
+    const barber_id = document.getElementById('addAppointmentBarberName').value;
+    const service_id = document.getElementById('addAppointmentServiceName').value;
+    const branch_id = document.getElementById('addAppointmentBranchName').value;
+    const date = document.getElementById('addAppointmentDate').value;
+    const time = document.getElementById('addAppointmentTime').value;
+    const appointment_type = document.getElementById('addAppointmentType').value;
 
     try {
         // Fetch customer_id based on email
