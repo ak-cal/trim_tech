@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 #about_us {
     background-color: #ffffff;
 }
