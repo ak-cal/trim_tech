@@ -325,7 +325,7 @@
                                 <i class="ri-mail-line form-icon"></i>
                                 <div class="form-box-input">
                                     <input type="email" id="addAppointmentForm-customerEmail" class="form-input" required>
-                                    <label for="addAppointmentForm-customerEmail" class="form-label">Customer Email:</label>
+                                    <label for="addAppointmentForm-customerEmail" class="form-label">Customer Email</label>
                                 </div>
                             </div>
 
@@ -336,7 +336,7 @@
                                         <option value="">Select Barber</option>
                                         <!-- Barbers will be dynamically inserted here -->
                                     </select>
-                                    <label for="addAppointmentForm-barberName" class="form-label">Barber:</label>
+                                    <label for="addAppointmentForm-barberName" class="form-label">Barber</label>
                                 </div>
                             </div>
                             
@@ -347,7 +347,7 @@
                                         <option value="">Select Service</option>
                                         <!-- Services will be dynamically inserted here -->
                                     </select>
-                                    <label for="addAppointmentForm-serviceName" class="form-label">Service:</label>
+                                    <label for="addAppointmentForm-serviceName" class="form-label">Service</label>
                                 </div>
                             </div>
                             
@@ -358,7 +358,7 @@
                                         <option value="">Select Branch</option>
                                         <!-- Branches will be dynamically inserted here -->
                                     </select>
-                                    <label for="addAppointmentForm-branchName" class="form-label">Branch:</label>
+                                    <label for="addAppointmentForm-branchName" class="form-label">Branch</label>
                                 </div>
                             </div>
                             
@@ -366,7 +366,7 @@
                                 <i class="ri-calendar-line form-icon"></i>
                                 <div class="form-box-input">
                                     <input type="date" id="addAppointmentForm-date" class="form-input" required>
-                                    <label for="addAppointmentForm-date" class="form-label">Date:</label>
+                                    <label for="addAppointmentForm-date" class="form-label">Date</label>
                                 </div>
                             </div>
                 
@@ -394,7 +394,7 @@
                                         <option value="17:00">17:00</option>
                                         <option value="17:30">17:30</option>
                                     </select>
-                                    <label for="addAppointmentForm-time" class="form-label">Time:</label>
+                                    <label for="addAppointmentForm-time" class="form-label">Time</label>
                                 </div>
                             </div>
                             
@@ -406,7 +406,7 @@
                                         <option value="Walk-in">Walk-in</option>
                                         <option value="Booking">Booked</option>
                                     </select>
-                                    <label for="addAppointmentForm-type" class="form-label">Appointment Type:</label>
+                                    <label for="addAppointmentForm-type" class="form-label">Appointment Type</label>
                                 </div>
                             </div>
                         </div>
@@ -473,17 +473,17 @@
                     <span class="close" onclick="closeAddQueueModal()">&times;</span>
                     <h3>Add Walk-in Client</h3>
                     <form id="addQueueForm">
-                        <label for="walkInClient">Client Name:</label>
+                        <label for="walkInClient">Client Name</label>
                         <input type="text" id="walkInClient" required>
             
-                        <label for="walkInBarber">Barber:</label>
+                        <label for="walkInBarber">Barber</label>
                         <select id="walkInBarber" required>
                             <option value="Mike">Mike</option>
                             <option value="David">David</option>
                             <option value="Chris">Chris</option>
                         </select>
             
-                        <label for="walkInTime">Time:</label>
+                        <label for="walkInTime">Time</label>
                         <input type="time" id="walkInTime" required>
             
                         <button type="submit">Add to Queue</button>
@@ -494,10 +494,18 @@
 
         <div class="main-service_management">
             <h2>Service Management</h2>
-            <button class="btn-add" onclick="openAddServiceModal()">+ Add Service</button>
+            <br>
 
-    
-            <table class="queue-table">
+            <!-- Search & Filter -->
+            <div class="search">
+                <input type="text" id="searchService" placeholder="Search..." onkeyup="filterServices()">
+            </div>
+
+            <!-- Add Service Button -->
+            <button class="btn btn-add btn-blue" id="showAddServiceModal" onclick="openAddServiceModal()">+ Add Service</button>
+
+            <!-- Service Table List -->
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -510,38 +518,83 @@
                     <!-- Services will be dynamically inserted here -->
                 </tbody>
             </table>
-            <div id="editServiceModal" class="modal">
-                <div class="modal-content">
-                    <h2>Edit Service</h2>
-                    <form id="editServiceForm">
-                        <input type="hidden" id="editServiceId">
-                        <label>Name:</label>
-                        <input type="text" id="editServiceName" required>
-                        <label>Description:</label>
-                        <input type="text" id="editServiceDescription" required>
-                        <label>Price:</label>
-                        <input type="number" id="editServicePrice" step="0.01" required>
-                        <button style ="margin-bottom: 10px;" type="submit">Update Service</button>
-                        <button type="button" onclick="closeEditModal()">Cancel</button>
-                    </form>
-                </div>
-            </div>
+
             <!-- Add Service Modal -->
             <div id="addServiceModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeAddServiceModal()">&times;</span>
                     <h3>Add New Service</h3>
-                    <form id="addServiceForm">
-                        <label for="serviceName">Service Name:</label>
-                        <input type="text" id="serviceName" required>
-    
-                        <label for="serviceDescription">Description:</label>
-                        <input type="text" id="serviceDescription" required>
-    
-                        <label for="servicePrice">Price:</label>
-                        <input type="number" id="servicePrice" required>
-    
-                        <button type="submit">Add Service</button>
+                    <br>
+                    <div id="addServiceMessage" class="message"></div>
+                    <form id="addServiceForm" action="">
+                        <div class="form-contents">
+                            <div class="form-box">
+                                <i class="ri-scissors-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <input type="text" id="addServiceForm-serviceName" class="form-input" required>
+                                    <label for="serviceName" class="form-label">Service Name</label>
+                                </div>
+                            </div>
+
+                            <div class="form-box">
+                                <i class="ri-file-list-3-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <input type="text" id="addServiceForm-serviceDescription" class="form-input" required>
+                                    <label for="serviceDescription" class="form-label">Description</label>
+                                </div>
+                            </div>
+
+                            <div class="form-box">
+                                <i class="ri-price-tag-3-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <input type="number" id="addServiceForm-servicePrice" class="form-input" required>
+                                    <label for="servicePrice" class="form-label">Price</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="submit-button btn-green" id="submitAddService">Save Service</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Edit Service Modal -->
+            <div id="editServiceModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeEditServiceModal()">&times;</span>
+                    <h2>Edit Service</h2>
+                    <br>
+                    <div id="editServiceMessage" class="message"></div>
+                    <form id="editServiceForm">
+                        <div class="form-contents">
+                            <input type="hidden" id="editServiceForm-service_id">
+
+                            <div class="form-box">
+                                <i class="ri-scissors-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <input type="text" id="editServiceForm-serviceName" class="form-input" required>
+                                    <label for="editServiceForm-serviceName" class="form-label">Service Name</label>
+                                </div>
+                            </div>
+
+                            <div class="form-box">
+                                <i class="ri-file-list-3-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <input type="text" id="editServiceForm-serviceDescription" class="form-input" required>
+                                    <label for="editServiceForm-serviceDescription" class="form-label">Description</label>
+                                </div>
+                            </div>
+
+                            <div class="form-box">
+                                <i class="ri-price-tag-3-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <input type="number" id="editServiceForm-servicePrice" step="0.01" class="form-input" required>
+                                    <label for="editServiceForm-servicePrice" class="form-label">Price</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="submit-button btn-green" id="submitEditService">Update Service</button>
                     </form>
                 </div>
             </div>

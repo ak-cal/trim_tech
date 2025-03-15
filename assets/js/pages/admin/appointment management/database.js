@@ -52,6 +52,7 @@ async function fetchAppointments() {
     tableBody.innerHTML = ""; // Clear existing content
 
     displayAppointments(data);
+    filterAppointments();
 }
 
 // Display Appointments

@@ -51,6 +51,7 @@ async function fetchUsers() {
         `;
         tableBody.innerHTML += row;
     });
+    filterUsers();
 }
 
 // Fetch Users on div load
