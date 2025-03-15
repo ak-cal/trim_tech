@@ -602,18 +602,26 @@
 
         <div class="main-review_moderation">
             <h2>Review Moderation</h2>
-        
-            <table class="review-table">
+            <br>
+
+            <!-- Search & Filter -->
+            <div class="search">
+                <input type="text" id="searchReview" placeholder="Search..." onkeyup="filterReviews()">
+            </div>
+
+            <!-- Reviews Table List -->
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Client</th>
+                        <th>Customer</th>
                         <th>Rating</th>
-                        <th>Review</th>
+                        <th>Comment</th>
                         <th>Barber</th>
+                        <th>Service</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="reviewTableBody">
+                <tbody id="reviewsTableBody">
                     <!-- Reviews will be dynamically inserted here -->
                 </tbody>
             </table>
