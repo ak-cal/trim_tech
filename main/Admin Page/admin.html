@@ -508,34 +508,48 @@
         
             <div class="notification-form">
                 <form id="notification-form">
-                    <label for="recipientType">Recipient Type:</label>
-                    <select id="recipientType">
-                        <option id="client" value="client">Clients</option>
-                        <option id="barber" value="barber">Barbers</option>
+                    <div class="form-flex">
+                        <div>
+                            <label for="recipientType">Recipient Type:</label>
+                            <select id="recipientType">
+                                <option id="client" value="client">Clients</option>
+                                <option id="barber" value="barber">Barbers</option>
+                            </select>
+                        </div>
+                        <div>                    
+                            <label for="statusType">Status:</label>
+                            <select id="statusType">
+                                <option id="confirmed" value="confirmed">Confirmed</option>
+                                <option id="cancelled" value="cancelled">Cancelled</option>
+                                <option id="rescheduled" value="rescheduled">Rescheduled</option>
+                            </select></div>
+                        <div>
+                            <input type="email" id="user_email" name="email" maxlength="80" placeholder="Email Address" required>
+                                            
+                            <input type="text" id="searchInput" placeholder="Search Appointment by Name">
+                        </div>
+                    </div>
+                    <br>
+                    <select id="appointmentSelect">
+                        <option> Select Appointment </option>
+                        <!-- Appointments are dynamically displayed-->
                     </select>
-                    <label for="statusType">Status:</label>
-                    <select id="statusType">
-                        <option id="confirmed" value="confirmed">Confirmed</option>
-                        <option id="cancelled" value="cancelled">Cancelled</option>
-                        <option id="rescheduled" value="rescheduled">Rescheduled</option>
-                    </select>
-                    <input type="email" id="user_email" name="email" maxlength="80" placeholder="Email Address" required>
                     
-            
                     <label for="notificationMessage">Message:</label>
                     <textarea id="notificationMessage" rows="3" placeholder="Enter notification message"></textarea>
             
                     <button type="submit">Send Notification</button>
+
                 </form>
             </div>
-        
+            <br>
             <h3>Sent Notifications</h3>
             <table class="notification-table">
                 <thead>
                     <tr>
                         <th>Recipient Type</th>
-                        <th>Message</th>
                         <th>Status</th>
+                        <th>Message</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -650,7 +664,7 @@
     <script type="module" src="Service Management Components/service_management-database.js"></script>
     <script src="Review Moderation Components/review_moderation-script.js"></script>
     <script src="Reports Analytics Components/reports_analytics-script.js"></script>
-    <script src="Notification Management Components/notification_management-script.js"></script>
+    <script type="module" src="Notification Management Components/notification_management-script.js"></script>
     <script src="System Settings Components/system_settings-script.js"></script>
     <script src="Security Backups Components/security_backups-script.js"></script>
 </body>
