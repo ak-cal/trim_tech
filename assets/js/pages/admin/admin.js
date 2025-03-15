@@ -16,13 +16,26 @@ function setActive(element) {
     const activeSection = document.querySelector(`.main-${sectionClass}`);
     if (activeSection) {
         activeSection.classList.add('active');
+        // Save the active section to localStorage
+        localStorage.setItem('activeSection', sectionClass);
     }
 }
 
-// Set the initial active section based on the active sidebar item
+// Set the initial active section based on the active sidebar item or localStorage
 document.addEventListener('DOMContentLoaded', () => {
-    const activeSidebarItem = document.querySelector('.sidebar-nav-item.active');
-    if (activeSidebarItem) {
-        setActive(activeSidebarItem);
+    const activeSectionClass = localStorage.getItem('activeSection');
+    if (activeSectionClass) {
+        const activeSidebarItem = Array.from(document.querySelectorAll('.sidebar-nav-item')).find(item => {
+            const sectionClass = item.textContent.trim().toLowerCase().replace(/ & /g, '_').replace(/ /g, '_');
+            return sectionClass === activeSectionClass;
+        });
+        if (activeSidebarItem) {
+            setActive(activeSidebarItem);
+        }
+    } else {
+        const activeSidebarItem = document.querySelector('.sidebar-nav-item.active');
+        if (activeSidebarItem) {
+            setActive(activeSidebarItem);
+        }
     }
 });

@@ -47,6 +47,16 @@
     border: none;
 }
 
+.btn-approve {
+    border: none;
+    padding: 5px 10px;
+}
+
+.btn-cancel {
+    border: none;
+    padding: 5px 10px;
+}
+
 .close {
     float: right;
     font-size: 20px;
