@@ -18,6 +18,7 @@
 .form-icon, .form-eye {
     color: black;
     font-size: 1.25rem;
+    margin-right: 10px;
 }
 
 .form-input {
@@ -48,7 +49,7 @@
 .form-viewoff {
     position:absolute;
     right: 0;
-    top: 18px;
+    top: 12px;
     z-index: 10;
     cursor: pointer;
 }
