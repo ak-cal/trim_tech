@@ -27,6 +27,7 @@ async function fetchAppointments() {
             customer_id,
             barber_id,
             service_id,
+            cost,
             branch_id,
             date,
             time,
@@ -65,6 +66,7 @@ async function displayAppointments(data) {
                 <td>${appointment.Customers.Users.name}</td>
                 <td>${appointment.Barbers.Staff.Users.name}</td>
                 <td>${appointment.Services.name}</td>
+                <td>${appointment.cost}</td>
                 <td>${appointment.Branches.name}</td>
                 <td>${appointment.date}</td>
                 <td>${appointment.time}</td>
