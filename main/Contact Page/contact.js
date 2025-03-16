@@ -98,5 +98,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const userIcon = document.querySelector(".ri-user-3-line");
+    const dropdown = document.querySelector(".user-dropdown");
+
+    userIcon.addEventListener("click", function () {
+        dropdown.classList.toggle("show");
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!userIcon.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.remove("show");
+        }
+    });
+});
+
+
 
 

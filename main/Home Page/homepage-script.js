@@ -1,19 +1,53 @@
-const slider = document.querySelector('.slider');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+import { supabase } from "../main.js";
 
-let index = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Checking elements...");
 
-nextBtn.addEventListener('click', () => {
-    if (index < 2) {  
-        index++;
-        slider.style.transform = `translateX(-${index * 100}%)`;
+    const userIcon = document.getElementById("userIcon");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const signOutBtn = document.getElementById("signOutBtn");
+
+    console.log("userIcon:", userIcon);
+    console.log("dropdownMenu:", dropdownMenu);
+    console.log("signOutBtn:", signOutBtn);
+
+    if (!userIcon || !dropdownMenu || !signOutBtn) {
+        console.error("Dropdown elements missing. Check HTML structure.");
+        return;
     }
-});
 
-prevBtn.addEventListener('click', () => {
-    if (index > 0) {
-        index--;
-        slider.style.transform = `translateX(-${index * 100}%)`;
-    }
+    // Ensure dropdown is hidden initially
+    dropdownMenu.style.display = "none";
+
+    userIcon.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("User icon clicked! Toggling dropdown.");
+
+        if (dropdownMenu.style.display === "block") {
+            dropdownMenu.style.display = "none";
+            console.log("Dropdown closed.");
+        } else {
+            dropdownMenu.style.display = "block";
+            console.log("Dropdown opened.");
+        }
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!userIcon.contains(event.target) && !dropdownMenu.contains(event.target) && dropdownMenu.style.display === "block") {
+            console.log("Clicked outside. Closing dropdown.");
+            dropdownMenu.style.display = "none";
+        }
+    });
+
+    signOutBtn.addEventListener("click", async () => {
+        console.log("Sign out clicked.");
+        const { error } = await supabase.auth.signOut();
+        if (!error) {
+            console.log("User signed out.");
+            localStorage.removeItem("userLoggedIn"); // Remove stored session
+            location.reload(); // Refresh page after logout
+        } else {
+            console.error("Sign out error:", error.message);
+        }
+    });
 });

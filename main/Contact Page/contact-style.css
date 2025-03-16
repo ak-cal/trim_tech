@@ -1,4 +1,3 @@
-
 /* Contact Section */
 #contact {
   display: flex;
@@ -11,13 +10,14 @@
   background-size: cover;
   background-position: center;
   height: 80vh;
-  color:#fff;
+  color: #fff;
   margin-top: 1%;
 }
 
 .container {
   width: 40%;
 }
+
 .contact_title {
   font-size: 4em;
   font-weight: bold;
@@ -54,7 +54,6 @@
   border-radius: 5px;
   border: none;
 }
-
 
 .review-container {
   display: flex;
@@ -133,6 +132,42 @@ button:hover {
   }
 }
 
-button:hover {
-  background-color: #ddd;
+
+/* Navbar Dropdown Fix */
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px; /* Moves dropdown lower */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  display: none; /* Hidden by default */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+  text-align: center;
+  z-index: 100;
+}
+
+.dropdown-menu button {
+  width: 100%;
+  border: none;
+  background: #d2bb85;
+  color: white;
+  font-size: 1rem;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background-color: #2a2823
+}
+
+/* Class to toggle dropdown visibility */
+.show-dropdown {
+  display: block;
 }
