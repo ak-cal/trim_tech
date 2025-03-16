@@ -55,50 +55,54 @@ window.editService = async function(service_id, name, description, price) {
 document.getElementById("submitEditService").onclick = async function(event) {
     event.preventDefault();
 
-    const service_id = document.getElementById("editServiceForm-service_id").value;
-    const serviceName = document.getElementById("editServiceForm-serviceName").value.trim();
-    const serviceDescription = document.getElementById("editServiceForm-serviceDescription").value.trim();
-    const servicePrice = parseFloat(document.getElementById("editServiceForm-servicePrice").value);
+    if (confirm("Are you sure you want to update this service?")) {
+        const service_id = document.getElementById("editServiceForm-service_id").value;
+        const serviceName = document.getElementById("editServiceForm-serviceName").value.trim();
+        const serviceDescription = document.getElementById("editServiceForm-serviceDescription").value.trim();
+        const servicePrice = parseFloat(document.getElementById("editServiceForm-servicePrice").value);
 
-    if (!serviceName || !serviceDescription || isNaN(servicePrice)) {
-        alert("Please fill in all fields correctly.");
-        return;
-    }
+        if (!serviceName || !serviceDescription || isNaN(servicePrice)) {
+            alert("Please fill in all fields correctly.");
+            return;
+        }
 
-    try {
-        const { error } = await supabase
-            .from("Services")
-            .update({
-                name: serviceName,
-                description: serviceDescription,
-                price: servicePrice
-            })
-            .eq("service_id", service_id);
+        try {
+            const { error } = await supabase
+                .from("Services")
+                .update({
+                    name: serviceName,
+                    description: serviceDescription,
+                    price: servicePrice
+                })
+                .eq("service_id", service_id);
 
-        if (error) throw error;
+            if (error) throw error;
 
-        fetchServices(); // Refresh the table
-        closeEditServiceModal();
-    } catch (err) {
-        console.error("Error updating service:", err);
+            fetchServices(); // Refresh the table
+            closeEditServiceModal();
+        } catch (err) {
+            console.error("Error updating service:", err);
+        }
     }
 };
 
 // Delete Service
 window.deleteService = async function(service_id) {
-    try {
-        const { error } = await supabase
-            .from('Services')
-            .delete()
-            .eq('service_id', service_id);
+    if (confirm("Are you sure you want to delete this service?")) {
+        try {
+            const { error } = await supabase
+                .from('Services')
+                .delete()
+                .eq('service_id', service_id);
 
-        if (error) throw error;
+            if (error) throw error;
 
-        console.log("Service deleted successfully!"); // Confirm successful deletion
-        fetchServices(); // Reload table
+            console.log("Service deleted successfully!"); // Confirm successful deletion
+            fetchServices(); // Reload table
 
-    } catch (err) {
-        console.error("Error deleting service:", err);
+        } catch (err) {
+            console.error("Error deleting service:", err);
+        }
     }
 };
 

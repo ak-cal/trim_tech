@@ -160,16 +160,18 @@ window.editUser = async function(user_id) {
     openEditUserModal();
     
     document.getElementById('submitEditUser').onclick = async function(event) {
-      event.preventDefault();
-      console.log("Save User clicked");
+        event.preventDefault();
+        console.log("Save User clicked");
 
-      const name = document.getElementById('editUserForm-name').value;
-      const phone = document.getElementById('editUserForm-phone').value;
-      const role = document.getElementById('editUserForm-role').value;
+        if (confirm("Are you sure you want to update this user?")) {
+            const name = document.getElementById('editUserForm-name').value;
+            const phone = document.getElementById('editUserForm-phone').value;
+            const role = document.getElementById('editUserForm-role').value;
 
-      console.log("Updating user: ", user_id, name, phone, role);
+            console.log("Updating user: ", user_id, name, phone, role);
 
-      await updateUser(user_id, name, phone, role);
+            await updateUser(user_id, name, phone, role);
+        }
     }
 }
 
