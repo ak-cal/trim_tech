@@ -17,20 +17,21 @@ export async function signUp(email, password, name, phone) {
         console.error("Error signing up:", error.message);
         return { error };
     }
-    return { user };
+    return { user: data.user };
 }
 
 // Login function
 export async function login(email, password) {
-    const { user, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password
     });
+
     if (error) {
         console.error("Error logging in:", error.message);
         return { error };
     }
-    return { user };
+    return { user: data.user };
 }
 
 // Logout function
@@ -44,14 +45,18 @@ export async function logout() {
 }
 
 // Get current user function
-export function getCurrentUser() {
-    const user = supabase.auth.user();
-    return user;
+export async function getCurrentUser() {
+    const { data, error } = await supabase.auth.getUser();
+    if (error) {
+        console.error("Error fetching user:", error.message);
+        return null;
+    }
+    return data.user;
 }
 
 // Forgot password function
 export async function forgotPassword(email) {
-    const { error } = await supabase.auth.api.resetPasswordForEmail(email);
+    const { error } = await supabase.auth.resetPasswordForEmail(email);
     if (error) {
         console.error("Error sending password reset email:", error.message);
         return { error };
