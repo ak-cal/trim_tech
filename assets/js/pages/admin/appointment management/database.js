@@ -63,15 +63,15 @@ async function displayAppointments(data) {
     data.forEach(appointment => {
         let row = `
             <tr>
-                <td>${appointment.Customers.Users.name}</td>
-                <td>${appointment.Barbers.Staff.Users.name}</td>
-                <td>${appointment.Services.name}</td>
-                <td>${appointment.cost}</td>
-                <td>${appointment.Branches.name}</td>
-                <td>${appointment.date}</td>
-                <td>${appointment.time}</td>
-                <td>${appointment.appointment_type}</td>
-                <td>${appointment.status}</td>
+                <td>${appointment.Customers?.Users?.name || "Deleted"}</td>
+                <td>${appointment.Barbers?.Staff?.Users?.name || "Deleted"}</td>
+                <td>${appointment.Services?.name || "Deleted"}</td>
+                <td>${appointment.cost || "Deleted"}</td>
+                <td>${appointment.Branches?.name || "Deleted"}</td>
+                <td>${appointment.date || "Deleted"}</td>
+                <td>${appointment.time || "Deleted"}</td>
+                <td>${appointment.appointment_type || "Deleted"}</td>
+                <td>${appointment.status || "Deleted"}</td>
                 <td>
                     <button class="btn btn-edit btn-green" onclick="editAppointment('${appointment.appointment_id}')">Edit</button>
                 </td>
@@ -289,4 +289,4 @@ window.editAppointment = async function(appointment_id) {
     
 document.addEventListener('DOMContentLoaded', fetchAppointments);
 document.addEventListener('DOMContentLoaded', fetchAndDisplayOptions);
-document.addEventListener('DOMContentLoaded', fetchAndDisplayBranchesForSearch)
+document.addEventListener('DOMContentLoaded', fetchAndDisplayBranchesForSearch);
