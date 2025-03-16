@@ -11,9 +11,17 @@
     color: white;
 }
 
+.btn-blue:hover {
+    background: #2979ae;
+}
+
 .btn-green {
     background: #2ecc71;
     color: white;
+}
+
+.btn-green:hover {
+    background: #29b463;
 }
 
 .btn-orange {
@@ -21,9 +29,17 @@
     color: white;
 }
 
+.btn-orange:hover {
+    background: #bf681c;
+}
+
 .btn-red {
     background: #e74c3c;
     color: white;
+}
+
+.btn-red:hover {
+    background: #c0392b;
 }
 
 .btn-add {
