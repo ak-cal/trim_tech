@@ -7,9 +7,10 @@ export async function signUp(email, password, name, phone) {
         password: password,
         options: {
             data: {
-            display_name: name,
-            phone: phone,
-            }
+                display_name: name,
+                phone: phone
+            },
+            email_confirm: true
         }
     });
     if (error) {
@@ -23,7 +24,7 @@ export async function signUp(email, password, name, phone) {
 export async function login(email, password) {
     const { user, error } = await supabase.auth.signInWithPassword({
         email: email,
-        password: password,
+        password: password
     });
     if (error) {
         console.error("Error logging in:", error.message);
