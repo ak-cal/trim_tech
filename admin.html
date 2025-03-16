@@ -634,35 +634,59 @@
         <div class="main-reports_analytics">
             <h2>Reports & Analytics</h2>
         
-            <div class="report-cards">
-                <div class="report-card">
-                    <h3>Total Revenue</h3>
-                    <p id="totalRevenue">$0.00</p>
+            <div class="reports_analytics-cards">
+                <div class="card-section">
+                    <div class="card">
+                        <h3>Total Revenue This Month</h3>
+                        <p id="monthlyTotalRevenue"><!-- Total Revenue this month will be dynamically loaded here --></p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Total Appointments This Month</h3>
+                        <p id="monthlyTotalAppointments"><!-- Total Appointments this month will be dynamically loaded here --></p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Returning Customers This Month</h3>
+                        <p id="monthlyReturningCustomers"><!-- Number of Returning Customers this month will be dynamically loaded here --></p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>New Customers This Month</h3>
+                        <p id="monthlyNewCustomers"><!-- Number of New Customers this month will be dynamically loaded here --></p>
+                    </div>
                 </div>
-        
-                <div class="report-card">
-                    <h3>Total Appointments</h3>
-                    <p id="totalAppointments">0</p>
-                </div>
-        
-                <div class="report-card">
-                    <h3>Returning Clients</h3>
-                    <p id="returningClients">0</p>
-                </div>
-        
-                <div class="report-card">
-                    <h3>New Clients</h3>
-                    <p id="newClients">0</p>
+
+                <div class="card-section">
+                    <div class="card">
+                        <h3>Total Revenue Today</h3>
+                        <p id="dailyTotalRevenue"><!-- Total Revenue today will be dynamically loaded here --></p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Total Appointments Today</h3>
+                        <p id="dailyTotalAppointments"><!-- Total Appointments today will be dynamically loaded here --></p>
+                    </div>
+            
+                    <div class="card">
+                        <h3>Returning Customers Today</h3>
+                        <p id="dailyReturningCustomers"><!-- Number of Returning Customers today will be dynamically loaded here --></p>
+                    </div>
+
+                    <div class="card">
+                        <h3>New Customers Today</h3>
+                        <p id="dailyNewCustomers"><!-- Number of New Customers today will be dynamically loaded here --></p>
+                    </div>
                 </div>
             </div>
         
             <h3>Appointments by Barber</h3>
-            <canvas id="barberChart"></canvas>
+            <canvas id="barberChart"><!-- Appointments by Barber will be dynamically loaded here --></canvas>
         
             <h3>Popular Services</h3>
-            <canvas id="serviceChart"></canvas>
+            <canvas id="serviceChart"><!-- Popular Services will be dynamically loaded here --></canvas>
         
-            <button onclick="exportReport()">Download CSV Report</button>
+            <button class="btn btn-add btn-blue" onclick="exportReport()">Download CSV Report</button>
         </div>        
 
         <div class="main-notification_management">
