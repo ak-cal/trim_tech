@@ -25,7 +25,6 @@ export async function login(email, password) {
         email: email,
         password: password
     });
-
     if (error) {
         console.error("Error logging in:", error.message);
         return { error };
