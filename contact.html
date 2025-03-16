@@ -67,40 +67,44 @@
         <div class="review-container">
             <div class="image-section"></div>
                 <div class="form-section">
-                    <div class="form-box">
-                        <h1 class="contact_title">Review</h1>
-                        <h3 class="contact_sub">Share your feedback with us!</h3>
+                    <form class="form-review">
+                        <div class="form-box">
+                            <h1 class="contact_title">Review</h1>
+                            <h3 class="contact_sub">Share your feedback with us!</h3>
 
-                        <input type="text" placeholder="Name">
+                            <label for="review_email">Email</label>
+                            <input id="review_email" type="email" placeholder="Email">
 
-                        <select>
-                            <option>Select Barber</option>
-                            <option>John</option>
-                            <option>Mike</option>
-                            <option>Emma</option>
-                        </select>
-
-                        <select class="drop-service">
-                            <option>Service</option>
-                        </select>
-
-                        <textarea placeholder="How was your experience"></textarea>
-
-                        <div class="rating">
-                            <span>Rate us! </span>
-
-                            <select>
-                                <option value="">Select</option>
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
+                            <label for="review_barber">Barber</label>
+                            <select id="review_barber" class="drop-barber">
+                                <option value="">Select Barber</option>
+                                <!-- Barbers will be dynamically loaded here -->
                             </select>
-                        </div>
 
-                        <button>SEND</button>
-                    </div>
+                            <label for="review_service">Service</label>
+                            <select id="review_service" class="drop-service">
+                                <option value="">Select Service</option>
+                                <!-- Services will be dynamically loaded here -->
+                            </select>
+
+                            <label for="review_experience">Experience</label>
+                            <textarea id="review_experience" placeholder="How was your experience"></textarea>
+
+                            <div class="rating">
+                                <label for="review_rating">Rating</label>
+                                <select id="review_rating">
+                                    <option value="">Select Rating</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+
+                            <button>SEND</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -142,7 +146,6 @@
         </div>
     </footer>
 
-    <script type="module" src="../main.js"></script>
-    <script type="module" src="contact.js"></script>
+    <script type="module" src="assets\js\pages\contact\contact.js"></script>
 </body>
 </html>

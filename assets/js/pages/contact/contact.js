@@ -1,10 +1,13 @@
-import { supabase } from "../main.js";
+import { supabase } from "../../config/supabase.js";
 
 async function fetchServiceName() {
     try {
         const { data, error } = await supabase
             .from('Services')
-            .select('name');
+            .select(`
+                service_id,
+                name
+            `);
 
         if (error) {
             throw error;
@@ -12,10 +15,10 @@ async function fetchServiceName() {
 
         const serviceDrops = document.querySelectorAll('.drop-service');
         serviceDrops.forEach(dropdown => {
-            dropdown.innerHTML = '<option>Service</option>';
+            dropdown.innerHTML = '<option>Select Service</option>';
             data.forEach(service => {
                 const option = document.createElement('option');
-                option.value = service.name;
+                option.value = service.service_id;
                 option.textContent = service.name;
                 dropdown.appendChild(option);
             });
@@ -25,35 +28,91 @@ async function fetchServiceName() {
         console.error("Error fetching services:", err.message);
     }
 }
-document.addEventListener('DOMContentLoaded', fetchServiceName);
 
+async function fetchBarberName() {
+    try {
+        const { data, error } = await supabase
+            .from('Barbers')
+            .select(`
+                barber_id,
+                Staff(Users(name))
+            `);
+
+        if (error) {
+            throw error;
+        }
+
+        const barberDrops = document.querySelectorAll('.drop-barber');
+        barberDrops.forEach(dropdown => {
+            dropdown.innerHTML = '<option>Select Barber</option>';
+            data.forEach(barber => {
+                const option = document.createElement('option');
+                option.value = barber.barber_id;
+                option.textContent = barber.Staff.Users.name;
+                dropdown.appendChild(option);
+            });
+        });
+
+    } catch (err) {
+        console.error("Error fetching barbers:", err.message);
+    }
+}
+
+// Fetch Customer ID based on email
+async function fetchCustomerId(email) {
+    try {
+        const { data, error } = await supabase
+            .from('Users')
+            .select('user_id')
+            .eq('email', email)
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        return data.user_id;
+    } catch (error) {
+        console.error("Error fetching customer name:", error.message);
+        return null;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', fetchServiceName);
+document.addEventListener('DOMContentLoaded', fetchBarberName);
 
 document.addEventListener("DOMContentLoaded", function () {
-    const reviewForm = document.querySelector(".form-box");
+    const reviewForm = document.querySelector(".form-review");
     const reviewButton = reviewForm.querySelector("button");
 
     reviewButton.addEventListener("click", async function (event) {
         event.preventDefault(); // Prevent default form submission
 
         // Get input values
-        const name = reviewForm.querySelector("input[type='text']").value;
-        const barber = reviewForm.querySelector("select:nth-of-type(1)").value;
-        const service = reviewForm.querySelector(".drop-service").value;
+        const email = document.getElementById("review_email").value;
+        const barber_id = reviewForm.querySelector(".drop-barber").value;
+        const service_id = reviewForm.querySelector(".drop-service").value;
         const experience = reviewForm.querySelector("textarea").value;
         const rating = reviewForm.querySelector(".rating select").value;
 
         // Validate input fields
-        if (!name || barber === "Select Barber" || service === "Service" || !experience || !rating) {
+        if (!email || barber_id === "" || service_id === "" || !experience || !rating) {
             alert("Please fill in all fields.");
+            return;
+        }
+
+        const customer_id = await fetchCustomerId(email); // Await the fetchCustomerId function
+        if (!customer_id) {
+            alert("Customer not found. Please sign up using the email.");
             return;
         }
 
         // Insert data into Supabase
         const { data, error } = await supabase.from("Reviews").insert([
             {
-                customer_name: name,
-                barber_name: barber,
-                service_name: service,
+                customer_id: customer_id,
+                barber_id: barber_id,
+                service_id: service_id,
                 comment: experience,
                 rating: parseInt(rating), // Convert rating to an integer
             },
@@ -68,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 // Initialize EmailJS
 document.addEventListener("DOMContentLoaded", function () {
     // Initialize EmailJS
