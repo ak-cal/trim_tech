@@ -9,8 +9,7 @@ export async function signUp(email, password, name, phone) {
             data: {
                 display_name: name,
                 phone: phone,
-            },
-            email_confirm: true
+            }
         }
     });
     if (error) {
