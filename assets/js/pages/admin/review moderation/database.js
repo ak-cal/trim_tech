@@ -1,6 +1,6 @@
 import { supabase } from "../../../config/supabase.js";
 
-// Review Moderation System Logic
+// Fetch Reviews
 async function fetchReviews() {
     const { data, error } = await supabase
         .from('Reviews')
@@ -43,6 +43,25 @@ async function fetchReviews() {
     filterReviews();
 }
 
+// Fetch Reviews on div load
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewModerationSection = document.querySelector('.main-review_moderation');
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                const isActive = reviewModerationSection.classList.contains('active');
+                if (isActive) {
+                    fetchReviews();
+                }
+            }
+        });
+    });
+
+    observer.observe(reviewModerationSection, { attributes: true });
+});
+
+// Delete Review
 window.deleteFeedback = async function(review_id) {
     console.log("Attempting to delete review with ID:", review_id);
 

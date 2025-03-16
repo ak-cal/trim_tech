@@ -157,12 +157,12 @@ async function fetchAndDisplayBranchesForSearch() {
 
 // Fetch Appointments on div load
 document.addEventListener('DOMContentLoaded', () => {
-    const userManagementSection = document.querySelector('.main-appointment_management');
+    const appointmentManagementSection = document.querySelector('.main-appointment_management');
 
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.attributeName === 'class') {
-                const isActive = userManagementSection.classList.contains('active');
+                const isActive = appointmentManagementSection.classList.contains('active');
                 if (isActive) {
                     fetchAppointments();
                     fetchAndDisplayOptions();
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    observer.observe(userManagementSection, { attributes: true });
+    observer.observe(appointmentManagementSection, { attributes: true });
 });
 
 // Add Appointments

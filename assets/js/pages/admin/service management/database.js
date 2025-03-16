@@ -1,6 +1,6 @@
 import { supabase } from "../../../config/supabase.js";
 
-// Services Management Functions //
+// Fetch Services
 async function fetchServices() {
     const { data, error } = await supabase
         .from('Services')
@@ -35,6 +35,24 @@ async function fetchServices() {
     });
     filterServices();
 }
+
+// Fetch Services on div load
+document.addEventListener('DOMContentLoaded', () => {
+    const serviceManagementSection = document.querySelector('.main-service_management');
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                const isActive = serviceManagementSection.classList.contains('active');
+                if (isActive) {
+                    fetchServices();
+                }
+            }
+        });
+    });
+
+    observer.observe(serviceManagementSection, { attributes: true });
+});
 
 // Edit Service
 window.editService = async function(service_id, name, description, price) {
