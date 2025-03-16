@@ -30,13 +30,17 @@
                 <li><a href="../Contact Page/contact.html">Contact</a></li>
             </div>
 
-
-                <div class="nav-icons">
-                    <li><a href="#"><i class="ri-notification-2-line"></i></a></li>
-                    <li><a href="#"><i class="ri-user-3-line"></i></a></li>
-                    <li><a href="#"><i class="ri-list-check"></i></a></li>
-                
-            </div>
+            <ul class="nav-icons">
+                <li><a href="#"><i class="ri-notification-2-line"></i></a></li>
+                <li class="nav-dropdown">
+                    <a href="#" id="userIcon"><i class="ri-user-3-line"></i></a>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <button id="signOutBtn">Sign Out</button>
+                    </div>
+                </li>
+                <li><a href="#"><i class="ri-list-check"></i></a></li>
+            </ul>
+            
         </ul>
     </nav>
 
@@ -50,7 +54,7 @@
         <div class="header-content">
             <h1>QUALITY GROOMING, RIGHT WHERE YOU SHOP</h1>
             <p>At Federal Barbers, we bring expert grooming services to the heart of your routine. Located inside your favorite grocery store, we make looking sharp more convenient than ever—because a fresh cut should be as easy as checking off your shopping list.</p>
-            <a style="font-size: 1em" href="#" class="book-now-btn">Book Appointment</a>
+            <a style="font-size: 1em" href="../Booking Page/bookingpage.html" class="book-now-btn">Book Appointment</a>
         </div>
     </div>
     <!-- Info Area -->
@@ -67,7 +71,7 @@
             </div>
     
             <!-- View All Button -->
-            <a href="#" class="view-all-btn">View All</a>
+            <a href="../Service Page/servicepage.html" class="view-all-btn">View All</a>
         </div>
     </section>
     
@@ -106,8 +110,9 @@
             <p>© 2025 Trim Tech. All Rights Reserved.</p>
         </div>
     </footer> 
-    <!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script type="module" src="../Home Page/homepage-script.js"></script>
+
 
 </body>
 
