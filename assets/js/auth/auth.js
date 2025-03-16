@@ -8,7 +8,8 @@ export async function signUp(email, password, name, phone) {
         options: {
             data: {
                 display_name: name,
-                phone: phone
+                phone: phone,
+                role: 'customer'
             },
             email_confirm: true
         }
@@ -47,4 +48,14 @@ export async function logout() {
 export function getCurrentUser() {
     const user = supabase.auth.user();
     return user;
+}
+
+// Forgot password function
+export async function forgotPassword(email) {
+    const { error } = await supabase.auth.api.resetPasswordForEmail(email);
+    if (error) {
+        console.error("Error sending password reset email:", error.message);
+        return { error };
+    }
+    return { message: "Password reset email sent successfully" };
 }

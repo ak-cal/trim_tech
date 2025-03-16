@@ -1,4 +1,4 @@
-import { signUp, login } from "../../auth/auth.js";
+import { signUp, login, forgotPassword } from "../../auth/auth.js";
 
 // Message div
 function showMessage(message, divId) {
@@ -77,5 +77,29 @@ signInButton.addEventListener('click', async (event) => {
         } else {
             showMessage("Unable to login: " + error.message, "signInMessage");
         }
+    }
+});
+
+// Forgot Password
+const forgotPasswordButton = document.getElementById('submitForgotPassword');
+forgotPasswordButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    console.log("Forgot Password clicked");
+
+    const email = document.getElementById('forgot-password-email').value;
+
+    try {
+        const { error } = await forgotPassword(email);
+
+        if (error) {
+            console.error("Forgot Password Error:", error.message);
+            showMessage("Unable to send password reset email: " + error.message, "forgotPasswordMessage");
+            return;
+        }
+
+        showMessage("Password reset email sent successfully", "forgotPasswordMessage");
+    } catch (error) {
+        console.error("Error during forgot password:", error.message);
+        showMessage("Unable to send password reset email: " + error.message, "forgotPasswordMessage");
     }
 });
