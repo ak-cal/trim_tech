@@ -31,7 +31,7 @@ signUpButton.addEventListener('click', async (event) => {
 
     try {
         // Proceed with signup
-        const { user, error } = await signUp(email, password, name, phone);
+        const { data, error } = await signUp(email, password, name, phone);
 
         if (error) {
             console.error("Signup Error:", error.message); // Log the exact error
@@ -62,7 +62,7 @@ signInButton.addEventListener('click', async (event) => {
 
     try {
         // Sign in the user with Supabase Auth
-        const { user, error } = await login(email, password);
+        const { data, error } = await login(email, password);
 
         if (error) throw error;
 
