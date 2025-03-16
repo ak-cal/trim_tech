@@ -10,10 +10,10 @@ function filterAppointments() {
         const customerNameCell = rows[i].getElementsByTagName('td')[0];
         const barberNameCell = rows[i].getElementsByTagName('td')[1];
         const serviceNameCell = rows[i].getElementsByTagName('td')[2];
-        const branchNameCell = rows[i].getElementsByTagName('td')[3];
-        const dateCell = rows[i].getElementsByTagName('td')[4];
-        const timeCell = rows[i].getElementsByTagName('td')[5];
-        const statusCell = rows[i].getElementsByTagName('td')[7];
+        const branchNameCell = rows[i].getElementsByTagName('td')[4];
+        const dateCell = rows[i].getElementsByTagName('td')[5];
+        const timeCell = rows[i].getElementsByTagName('td')[6];
+        const statusCell = rows[i].getElementsByTagName('td')[8];
 
         const customerName = customerNameCell.textContent.toLowerCase();
         const barberName = barberNameCell.textContent.toLowerCase();
