@@ -1,4 +1,4 @@
-import { signUp, login } from  "../../auth/auth.js";
+import { signUp, login } from "../../auth/auth.js";
 
 // Message div
 function showMessage(message, divId) {
@@ -19,8 +19,8 @@ function showMessage(message, divId) {
 }
 
 // Sign Up
-const signUp = document.getElementById('submitSignup');
-signUp.addEventListener('click', async (event) => {
+const signUpButton = document.getElementById('submitSignup');
+signUpButton.addEventListener('click', async (event) => {
     event.preventDefault();
     console.log("Signup clicked");
 
@@ -31,25 +31,16 @@ signUp.addEventListener('click', async (event) => {
 
     try {
         // Proceed with signup
-        const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-            data: {
-            display_name: name,
-            phone: phone,
-            }
-        }
-        });
+        const { user, error } = await signUp(email, password, name, phone);
 
         if (error) {
-        console.error("Signup Error:", error.message); // Log the exact error
-        if (error.message.includes("User already registered")) {
-            showMessage("Email is already in use", "signUpMessage");
-        } else {
-            showMessage("Unable to create User: " + error.message, "signUpMessage");
-        }
-        return; // Stop further execution
+            console.error("Signup Error:", error.message); // Log the exact error
+            if (error.message.includes("User already registered")) {
+                showMessage("Email is already in use", "signUpMessage");
+            } else {
+                showMessage("Unable to create User: " + error.message, "signUpMessage");
+            }
+            return; // Stop further execution
         }
 
         showMessage("User Registered Successfully", "signUpMessage");
@@ -61,8 +52,8 @@ signUp.addEventListener('click', async (event) => {
 });
 
 // Sign In
-const signIn = document.getElementById('submitSignIn');
-signIn.addEventListener('click', async (event) => {
+const signInButton = document.getElementById('submitSignIn');
+signInButton.addEventListener('click', async (event) => {
     event.preventDefault();
     console.log("Signin clicked");
 
@@ -71,10 +62,7 @@ signIn.addEventListener('click', async (event) => {
 
     try {
         // Sign in the user with Supabase Auth
-        const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-        });
+        const { user, error } = await login(email, password);
 
         if (error) throw error;
 
@@ -85,9 +73,9 @@ signIn.addEventListener('click', async (event) => {
     } catch (error) {
         console.error("Login Error: ", error.message);
         if (error.message.includes("Invalid login credentials")) {
-        showMessage("Invalid Email or Password", "signInMessage");
+            showMessage("Invalid Email or Password", "signInMessage");
         } else {
-        showMessage("Unable to login: " + error.message, "signInMessage");
+            showMessage("Unable to login: " + error.message, "signInMessage");
         }
     }
 });
