@@ -32,18 +32,37 @@
 
             <ul class="nav-icons">
                 <li><a href="#"><i class="ri-notification-2-line"></i></a></li>
+            
                 <li class="nav-dropdown">
                     <a href="#" id="userIcon"><i class="ri-user-3-line"></i></a>
                     <div class="dropdown-menu" id="dropdownMenu">
                         <button id="signOutBtn">Sign Out</button>
                     </div>
                 </li>
-                <li><a href="#"><i class="ri-list-check"></i></a></li>
-            </ul>
-            
+                <li><a id="listIcon" href="#"><i class="ri-list-check"></i></a></li>
+            </ul>  
         </ul>
     </nav>
-
+    <div id="appointmentSidebar" class="sidebar">
+        <h2>Your Appointments</h2>
+        <ul id="appointmentList" class="appointment-list"></ul>
+        <button id="closeSidebar">Close</button>
+    </div>
+    <div id="editProfileModal" class="userProfile-Modal">
+        <div class="userProfile-modalContent">
+            <span class="profilemodal-close-btn" id="closeProfileModal">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm">
+                <label for="editProfileName">Full Name:</label>
+                <input type="text" id="editProfileName" required>
+    
+                <label for="editProfileEmail">Email:</label>
+                <input type="email" id="editProfileEmail" required>
+    
+                <button type="submit" class="profilemodal-save-btn">Save Changes</button>
+            </form>
+        </div>
+    </div>
     <!-- Header Image -->
     <div id="header"><video autoplay muted loop id="header-video">
             <source src="../Home Page/Landers.mp4" type="video/mp4">
