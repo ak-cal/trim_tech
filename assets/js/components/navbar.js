@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
         });
     }
+    setupSidebar();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -101,3 +102,149 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+//View appointments 
+
+function setupSidebar() {
+    const listIcon = document.getElementById("listIcon");
+    const sidebar = document.getElementById("appointmentSidebar");
+    const closeSidebar = document.getElementById("closeSidebar");
+
+    if (!listIcon || !sidebar || !closeSidebar) {
+        console.error("Sidebar elements missing!");
+        return;
+    }
+
+    // Open sidebar when clicking list icon
+    listIcon.addEventListener("click", function (event) {
+        event.preventDefault();
+        sidebar.classList.toggle("open");
+    });
+
+    // Close sidebar when clicking close button
+    closeSidebar.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+    });
+}
+
+let appointmentData = [];
+
+async function fetchAppointments() {
+    const session = await getCurrentSession(); // Fetch session instead of just user
+
+    if (!session || !session.user) {
+        console.error("No logged-in user found.");
+        return;
+    }
+
+    const userEmail = session.user.email;
+
+    const { data, error } = await supabase
+        .from('Appointments')
+        .select(`
+            appointment_id,
+            date,
+            time,
+            appointment_type,
+            status,
+            Customers(Users(name, email)),
+            Barbers(Staff(Users(name))),
+            Services(name),
+            Branches(name)
+        `);
+
+    if (error) {
+        console.error("Error fetching appointments:", error);
+        return;
+    }
+
+    // 🔹 Filter appointments that belong to the logged-in user
+    const userAppointments = data.filter(appt => appt.Customers.Users.email === userEmail);
+
+    // Sort appointments by date (ascending)
+    appointmentData = userAppointments.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    displayAppointments(appointmentData);
+}
+
+function displayAppointments(appointments) {
+    const appointmentList = document.getElementById("appointmentList");
+
+    if (!appointmentList) {
+        console.error("Appointment list element not found!");
+        return;
+    }
+
+    // Clear previous appointments
+    appointmentList.innerHTML = "";
+
+    if (appointments.length === 0) {
+        appointmentList.innerHTML = "<p>No appointments found.</p>";
+        return;
+    }
+    appointments.sort((a, b) => {
+        const statusOrder = { pending: 1, completed: 2, cancelled: 3 };
+        return (statusOrder[a.status.toLowerCase()] || 99) - (statusOrder[b.status.toLowerCase()] || 99);
+    });
+    // Loop through appointments and create cards
+    appointments.forEach(appt => {
+        const appointmentItem = document.createElement("li");
+        appointmentItem.classList.add("appointment-card");
+        appointmentItem.innerHTML = `
+            <h3>${appt.Services.name}</h3>
+            <p><strong>Date:</strong> ${new Date(appt.date).toDateString()}</p>
+            <p><strong>Time:</strong> ${appt.time}</p>
+            <p><strong>Barber:</strong> ${appt.Barbers.Staff.Users.name}</p>
+            <p><strong>Status:</strong> <span class="status">${appt.status}</span></p>
+        `;
+    
+        // ✅ Append the cancel button only if the appointment is NOT "Completed"
+        if (appt.status.toLowerCase() !== "completed" && appt.status.toLowerCase() !== "cancelled") {
+            const cancelButton = document.createElement("button");
+            cancelButton.classList.add("cancel-btn");
+            cancelButton.setAttribute("data-id", appt.appointment_id);
+            cancelButton.textContent = "Cancel";
+    
+            cancelButton.addEventListener("click", async (event) => {
+                const appointmentId = event.target.getAttribute("data-id");
+                cancelAppointment(appointmentId);
+            });
+            
+            appointmentItem.appendChild(cancelButton); // ✅ Append instead of replacing innerHTML
+
+        }
+        appointmentList.appendChild(document.createElement("br"));
+        appointmentList.appendChild(document.createElement("hr"));
+        appointmentList.appendChild(document.createElement("br"));
+        appointmentList.appendChild(appointmentItem);
+    });
+
+    // Attach event listeners to cancel buttons
+    document.querySelectorAll(".cancel-btn").forEach(button => {
+        button.addEventListener("click", async (event) => {
+            const appointmentId = event.target.getAttribute("data-id");
+            cancelAppointment(appointmentId);
+        });
+    });
+}
+
+
+async function cancelAppointment(appointmentId) {
+    if (!confirm("Are you sure you want to cancel this appointment?")) return;
+
+    const { error } = await supabase
+        .from('Appointments')
+        .update({ status: "Cancelled" })
+        .eq('appointment_id', appointmentId);
+
+    if (error) {
+        console.error("Error canceling appointment:", error);
+        alert("Failed to cancel appointment.");
+    } else {
+        alert("Appointment cancelled successfully!");
+        fetchAppointments(); // Refresh the list
+    }
+}
+
+// Load appointments when the sidebar icon is clicked
+document.getElementById("listIcon").addEventListener("click", fetchAppointments);
