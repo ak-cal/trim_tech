@@ -2,27 +2,34 @@ import { supabase } from "../config/supabase.js";
 
 // Get current session function with user role
 export async function getCurrentSession() {
-    const { data: { session }, error } = await supabase.auth.getSession();
-
-    if (error || !session || !session.user) {
-        console.error("Error getting session or user is null:", error?.message);
-        return { error: "Failed to get session or user." };
+    const { data, error } = await supabase.auth.getSession();
+    if (error || !data.session) {
+        console.error("Error fetching session:", error ? error.message : "No session found");
+        return null;
     }
 
-    const { data, error: roleError } = await supabase
-        .from('Users')
-        .select('role')
-        .eq('user_id', session.user.id)
-        .single();
+    const session = data.session;
 
-    if (roleError) {
-        console.error("Error fetching user role:", roleError.message);
-        return { error: "Failed to fetch user role." };
+    try {
+        const { data: userData, error: userError } = await supabase
+            .from('Users')
+            .select('role')
+            .eq('user_id', session.user.id)
+            .single();
+
+        if (userError) {
+            console.error("Error fetching user role:", userError.message);
+            return session; // Return session even if role fetch fails
+        }
+
+        session.user.role = userData.role;
+    } catch (err) {
+        console.error("Unexpected error:", err);
     }
 
-    session.user.role = data?.role || ""; // Ensure role is always a string
     return session;
 }
+
 
 // Refresh session function
 export async function refreshSession() {
@@ -44,12 +51,9 @@ export function onSessionStateChange(callback) {
 // Check if user is admin function
 export async function isAdmin() {
     const session = await getCurrentSession();
-    
-    if (!session || session.error) {
-        console.error("Error checking admin role:", session?.error);
-        return false;
+    if (session && session.user.role) {
+        const roles = (session.user.role || "").split(',').map(r => r.trim()); // Ensure role is a string
+        return roles.includes('admin');
     }
-
-    const roles = session.user.role.split(',').map(r => r.trim()); // Ensure role is a string
-    return roles.includes('admin');
+    return false;
 }
