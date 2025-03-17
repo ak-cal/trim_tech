@@ -1,4 +1,4 @@
-import { supabase } from "../main.js";
+import { supabase } from "../../config/supabase.js";
 
 // Fetch and display Barbers, Services, and Branches as options
 async function fetchAndDisplayOptions() {
