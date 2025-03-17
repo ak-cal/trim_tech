@@ -76,7 +76,7 @@ async function displayAppointments(data) {
         const selectedAppointment = appointmentData.find(app => app.appointment_id == selectedAppointmentId);
 
         if (selectedAppointment) {
-            if (recipientType.value === "customer") {
+            if (recipientType.value === "customers") {
                 emailField.value = selectedAppointment.Customers?.Users?.email || "";
             } else if (recipientType.value === "barber") {
                 emailField.value = selectedAppointment.Barbers?.Staff?.Users?.email || "";
