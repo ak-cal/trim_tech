@@ -87,7 +87,7 @@
     margin-right: 10px;
 }
 
-.admin-sidebar-nav-item.active, .sidebar-nav-item:hover {
+.admin-sidebar-nav-item.active, .admin-sidebar-nav-item:hover {
     background-color: #AF906A;
     color: #fff;
 }
