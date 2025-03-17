@@ -33,8 +33,8 @@ function highlightSelectedDate() {
 }
 
 document.getElementById("bookBtn").addEventListener("click", async () => {
-    const userId = await getUserId();
-    if (!userId) {
+    const user_id = await getUserId();
+    if (!user_id) {
         document.getElementById("message").innerHTML = "<p class='error-message'>Please log in first!</p>";
         return;
     }
@@ -45,23 +45,23 @@ document.getElementById("bookBtn").addEventListener("click", async () => {
     }
 
     const time = document.getElementById("time").value;
-    const serviceId = document.getElementById("chooseService").value;
-    const branchId = document.getElementById("chooseBranch").value;
-    const barberId = document.getElementById("chooseBarber").value;
+    const service_id = document.getElementById("chooseService").value;
+    const branch_id = document.getElementById("chooseBranch").value;
+    const barber_id = document.getElementById("chooseBarber").value;
 
-    if (!time || !serviceId || !barberId) {
+    if (!time || !service_id || !barber_id) {
         document.getElementById("message").innerHTML = "<p class='error-message'>Please select time, service, and barber.</p>";
         return;
     }
 
-    const appointmentType = "Booking";
+    const appointment_type = "Booked";
 
     const { data, error } = await supabase.from("Appointments").insert([{
-        customer_id: userId,  
-        service_id: serviceId,
-        branch_id: branchId,
-        barber_id: barberId,
-        appointment_type: appointmentType,
+        customer_id: user_id,  
+        service_id: service_id,
+        branch_id: branch_id,
+        barber_id: barber_id,
+        appointment_type: appointment_type,
         date: selectedDate.toISOString().split('T')[0],
         time: time,
     }]);
