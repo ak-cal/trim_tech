@@ -1,7 +1,7 @@
 // Function to set the active sidebar item and corresponding main content section
 function setActive(element) {
     // Remove active class from all sidebar items
-    const sidebarItems = document.querySelectorAll('.sidebar-nav-item');
+    const sidebarItems = document.querySelectorAll('.admin-sidebar-nav-item');
     sidebarItems.forEach(item => item.classList.remove('active'));
 
     // Add active class to the clicked sidebar item
@@ -25,7 +25,7 @@ function setActive(element) {
 document.addEventListener('DOMContentLoaded', () => {
     const activeSectionClass = localStorage.getItem('activeSection');
     if (activeSectionClass) {
-        const activeSidebarItem = Array.from(document.querySelectorAll('.sidebar-nav-item')).find(item => {
+        const activeSidebarItem = Array.from(document.querySelectorAll('.admin-sidebar-nav-item')).find(item => {
             const sectionClass = item.textContent.trim().toLowerCase().replace(/ & /g, '_').replace(/ /g, '_');
             return sectionClass === activeSectionClass;
         });
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setActive(activeSidebarItem);
         }
     } else {
-        const activeSidebarItem = document.querySelector('.sidebar-nav-item.active');
+        const activeSidebarItem = document.querySelector('.admin-sidebar-nav-item.active');
         if (activeSidebarItem) {
             setActive(activeSidebarItem);
         }
