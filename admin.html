@@ -457,7 +457,7 @@
                                         <option value="No Show">No Show</option>
                                         <option value="Extended">Extended</option>
                                     </select>
-                                    <label for="editAppointmentForm-status" class="form-label">Status:</label>
+                                    <label for="editAppointmentForm-status" class="form-label">Status</label>
                                 </div>
                             </div>
                         </div>
@@ -470,14 +470,41 @@
         
         <div class="main-queue_management">
             <h2>Queue Management</h2>
+            <br>
+            <!-- Search & Filter -->
+            <div class="search">
+                <input type="text" id="searchQueue" placeholder="Search..." onkeyup="filterQueues()">
+                <div>
+                    <select id="queueFilterBranch" onchange="filterQueues()">
+                        <option value="">All Branches</option>
+                        <!-- Branches will be dynamically inserted here -->
+                    </select>
+
+                    <select id="queueFilterStatus" onchange="filterQueues()">
+                        <option value="">All Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                        <option value="No Show">No Show</option>
+                        <option value="Extended">Extended</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Add to Queue Button -->
+            <button class="btn btn-add btn-blue" id="showAddQueueModal" onclick="openAddQueueModal()">+ Add to Queue</button>
         
-            <button class="btn-add" onclick="openAddQueueModal()">+ Add Walk-in</button>
-        
-            <table class="queue-table">
+            <!-- Queue Table -->
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Client</th>
+                        <th>Customer</th>
                         <th>Barber</th>
+                        <th>Service</th>
+                        <th>Cost</th>
+                        <th>Branch</th>
                         <th>Time</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -488,26 +515,89 @@
                 </tbody>
             </table>
 
-            <!-- Add Walk-in Modal -->
+            <!-- Add to Queue Modal -->
             <div id="addQueueModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeAddQueueModal()">&times;</span>
-                    <h3>Add Walk-in Client</h3>
-                    <form id="addQueueForm">
-                        <label for="walkInClient">Client Name</label>
-                        <input type="text" id="walkInClient" required>
-            
-                        <label for="walkInBarber">Barber</label>
-                        <select id="walkInBarber" required>
-                            <option value="Mike">Mike</option>
-                            <option value="David">David</option>
-                            <option value="Chris">Chris</option>
-                        </select>
-            
-                        <label for="walkInTime">Time</label>
-                        <input type="time" id="walkInTime" required>
-            
-                        <button type="submit">Add to Queue</button>
+                    <h3>Add Walk-in Customer</h3>
+                    <br>
+                    <div id="addQueueMessage" class="message"></div>
+                    <form id="addQueueForm" class="form">
+                        <div class="form-contents">
+                            <div class="form-box">
+                                <i class="ri-mail-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <input type="email" id="queueEmail" class="form-input" required>
+                                    <label for="queueEmail" class="form-label">Customer Email</label>
+                                </div>
+                            </div>
+
+                            <div class="form-box">
+                                <i class="ri-user-5-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <select id="queueBarber" class="form-input" required>
+                                        <option value="">Select Barber</option>
+                                        <!-- Barbers will be dynamically loaded here -->
+                                    </select>
+                                    <label for="queueBarber" class="form-label">Barber</label>
+                                </div>
+                            </div>
+
+                            <div class="form-box">
+                                <i class="ri-scissors-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <select id="queueService" class="form-input" required>
+                                        <option value="">Select Service</option>
+                                        <!-- Services will be dynamically loaded here -->
+                                    </select>
+                                    <label for="queueService" class="form-label">Service</label>
+                                </div>
+                            </div>
+
+                            <div class="form-box">
+                                <i class="ri-store-2-line form-icon"></i>
+                                <div class="form-box-input">
+                                    <select id="queuebranch" class="form-input" required>
+                                        <option value="">Select Branch</option>
+                                        <!-- Branches will be dynamically inserted here -->
+                                    </select>
+                                    <label for="queuebranch" class="form-label">Branch</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="submit-button btn-green" id="submitAddQueue">Add to Queue</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Edit Queue Modal -->
+            <div id="editQueueModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeEditQueueModal()">&times;</span>
+                    <h3>Edit Queue</h3>
+                    <br>
+                    <div id="editQueueMessage" class="message"></div>
+                    <form id="editQueueForm" action="">
+                        <div class="form-contents">
+                            <div class="form-box">
+                                <i class="ri-checkbox-circle-line"></i>
+                                <div class="form-box-input">
+                                    <select id="queueStatus" class="form-input" required>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Confirmed">Confirmed</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="No Show">No Show</option>
+                                        <option value="Extended">Extended</option>
+                                    </select>
+                                    <label for="queueStatus" class="form-label">Status</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="submit-button btn-green" id="submitEditQueue">Update Queue</button>
                     </form>
                 </div>
             </div>
