@@ -2,21 +2,34 @@ import { supabase } from "../config/supabase.js";
 
 // Get current session function with user role
 export async function getCurrentSession() {
-    const session = supabase.auth.session();
-    if (session) {
-        const { data, error } = await supabase
+    const { data, error } = await supabase.auth.getSession();
+    if (error || !data.session) {
+        console.error("Error fetching session:", error ? error.message : "No session found");
+        return null;
+    }
+
+    const session = data.session;
+
+    try {
+        const { data: userData, error: userError } = await supabase
             .from('Users')
             .select('role')
             .eq('user_id', session.user.id)
             .single();
-        if (error) {
-            console.error("Error fetching user role:", error.message);
-            return null;
+
+        if (userError) {
+            console.error("Error fetching user role:", userError.message);
+            return session; // Return session even if role fetch fails
         }
-        session.user.role = data.role;
+
+        session.user.role = userData.role;
+    } catch (err) {
+        console.error("Unexpected error:", err);
     }
+
     return session;
 }
+
 
 // Refresh session function
 export async function refreshSession() {
