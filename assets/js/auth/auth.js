@@ -3,61 +3,71 @@ import { supabase } from "../config/supabase.js";
 // Sign up function
 export async function signUp(email, password, name, phone) {
     const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
+        email,
+        password,
         options: {
             data: {
                 display_name: name,
-                phone: phone,
+                phone,
             }
         }
     });
+
     if (error) {
-        console.error("Error signing up:", error.message);
-        return { error };
+        console.error("Sign-up failed:", error.message);
+        return null;
     }
-    return { user: data.user };
+
+    return data?.user || null;
 }
 
 // Login function
 export async function login(email, password) {
     const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password
+        email,
+        password
     });
+
     if (error) {
-        console.error("Error logging in:", error.message);
-        return { error };
+        console.warn("Login failed:", error.message); // Use warn for expected errors (e.g., wrong password)
+        return null;
     }
-    return { user: data.user };
+
+    return data?.user || null;
 }
 
 // Logout function
 export async function logout() {
     const { error } = await supabase.auth.signOut();
+
     if (error) {
-        console.error("Error logging out:", error.message);
-        return { error };
+        console.error("Logout failed:", error.message);
+        return false;
     }
-    return { message: "Logged out successfully" };
+
+    return true;
 }
 
 // Get current user function
 export async function getCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
+
     if (error) {
-        console.error("Error fetching user:", error.message);
+        console.error("Failed to fetch user:", error.message);
         return null;
     }
-    return data.user;
+
+    return data?.user || null;
 }
 
 // Forgot password function
 export async function forgotPassword(email) {
     const { error } = await supabase.auth.resetPasswordForEmail(email);
+
     if (error) {
-        console.error("Error sending password reset email:", error.message);
-        return { error };
+        console.warn("Password reset failed:", error.message);
+        return false;
     }
-    return { message: "Password reset email sent successfully" };
+
+    return true;
 }
