@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isActive) {
                     fetchQueues();
                     fetchAndDisplayOptions();
+                    fetchAndDisplayBranchesForSearch();
                 }
             }
         });

@@ -95,6 +95,26 @@ async function fetchUpcomingAppointments() {
     });
 }
 
+// Fetch on div load
+document.addEventListener('DOMContentLoaded', () => {
+    const overviewSection = document.querySelector('.main-overview');
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                const isActive = overviewSection.classList.contains('active');
+                if (isActive) {
+                    fetchDailyRevenue();
+                    fetchMonthlyRevenue();
+                    fetchUpcomingAppointments();
+                }
+            }
+        });
+    });
+
+    observer.observe(overviewSection, { attributes: true });
+});
+
 // Fetch and display data on page load
 fetchDailyRevenue();
 fetchMonthlyRevenue();

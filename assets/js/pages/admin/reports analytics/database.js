@@ -198,6 +198,25 @@ async function fetchPopularServices() {
     });
 }
 
+// Fetch on div load
+document.addEventListener('DOMContentLoaded', () => {
+    const reportsAnalyticsSection = document.querySelector('.main-reports_analytics');
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                const isActive = reportsAnalyticsSection.classList.contains('active');
+                if (isActive) {
+                    fetchDailyReport();
+                    fetchMonthlyReport();
+                }
+            }
+        });
+    });
+
+    observer.observe(reportsAnalyticsSection, { attributes: true });
+});
+
 // Function to export report as CSV
 function exportReport() {
     // Implement CSV export logic here

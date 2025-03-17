@@ -200,6 +200,25 @@ async function fetchNotifications(){
     })
 }
 
+// Fetch Appointments and Notifications on div load
+document.addEventListener('DOMContentLoaded', () => {
+    const notificationManagementSection = document.querySelector('.main-notification_management');
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                const isActive = notificationManagementSection.classList.contains('active');
+                if (isActive) {
+                    fetchAppointments();
+                    fetchNotifications();
+                }
+            }
+        });
+    });
+
+    observer.observe(notificationManagementSection, { attributes: true });
+});
+
 window.deleteNotification = async function(notification_Id) {
     if (confirm("Are you sure you want to delete this notification?")) {
         try {
