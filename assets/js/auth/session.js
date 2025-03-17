@@ -6,7 +6,7 @@ export async function getCurrentSession() {
 
     if (error || !session || !session.user) {
         console.error("Error getting session or user is null:", error?.message);
-        return null;
+        return { error: "Failed to get session or user." };
     }
 
     const { data, error: roleError } = await supabase
@@ -17,7 +17,7 @@ export async function getCurrentSession() {
 
     if (roleError) {
         console.error("Error fetching user role:", roleError.message);
-        return null;
+        return { error: "Failed to fetch user role." };
     }
 
     session.user.role = data?.role || ""; // Ensure role is always a string
