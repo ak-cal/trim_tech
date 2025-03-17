@@ -32,9 +32,16 @@
                 <li><a href="contact.html">Contact Us</a></li>
             </div>
 
-            <div class="nav-icons">
-                <li><a href="#"><i class="ri-notification-2-line"></i></a></li>
-                <li><a href="#"><i class="ri-user-3-line"></i></a></li>
+                <!-- User Dropdown -->
+                <li class="user-dropdown">
+                    <a href="#" id="user-icon"><i class="ri-user-3-line"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="#">Profile</a>
+                        <a href="#">Settings</a>
+                        <a href="#" id="sign-out">Sign Out</a>
+                    </div>
+                </li>
+
                 <li><a href="#"><i class="ri-list-check"></i></a></li>
             </div>
         </ul>
@@ -146,6 +153,7 @@
         </div>
     </footer>
 
-    <script type="module" src="assets\js\pages\contact\contact.js"></script>
+    <script type="module" src="assets/js/pages/contact/contact.js"></script>
+    <script type="module" src="assets/js/components/navbar.js"></script>
 </body>
 </html>
