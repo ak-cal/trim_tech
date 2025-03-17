@@ -1,4 +1,4 @@
-import { supabase } from "../main.js";
+import { supabase } from "../../config/supabase.js";
 
 async function fetchServices() {
     const { data, error } = await supabase
