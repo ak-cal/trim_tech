@@ -106,24 +106,57 @@
             <h2>Dashboard Overview</h2>
         
             <div class="overview-cards">
-                <div class="card">
-                    <i class="ri-user-line"></i>
-                    <h3>Clients</h3>
-                    <p id="clientCount">0</p>
+                <div class="card-section">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="ri-hand-coin-line"></i>
+                            <h3>Total Revenue Today</h3>
+                        </div>
+                        <p id="overviewDailyRevenue">Php 0.00<!-- Total Revenue Today will be dynamically loaded here --></p>
+                    </div>
                 </div>
         
-                <div class="card">
-                    <i class="ri-scissors-line"></i>
-                    <h3>Barbers</h3>
-                    <p id="barberCount">0</p>
+                <div class="card-section">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="ri-coin-line"></i>
+                            <h3>Total Revenue This Month</h3>
+                        </div>
+                        <p id="overviewMonthlyRevenue">Php 0.00<!-- Total Revenue this month will be dynamically loaded here --></p>
+                    </div>
                 </div>
         
-                <div class="card">
-                    <i class="ri-admin-line"></i>
-                    <h3>Admins</h3>
-                    <p id="adminCount">0</p>
+                <div class="card-section">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="ri-calendar-event-line"></i>
+                            <h3>Upcoming Appointments</h3>
+                        </div>
+                        <p id="overviewUpcomingAppointments">0<!-- Number of upcoming appointments will be dynamically loaded here --></p>
+                    </div>
                 </div>
             </div>
+
+            <br>
+            <h2>Upcoming Appointments</h2>
+            <br>
+
+            <!-- Upcoming Appointments List Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Barber</th>
+                        <th>Service</th>
+                        <th>Branch</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="overviewUpcomingAppointmentsTableBody">
+                    <!-- Upcoming appointments will be dynamically loaded here -->
+                </tbody>
+            </table>
         </div>        
 
         <div class="main-user_management">
