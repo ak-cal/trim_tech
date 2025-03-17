@@ -231,7 +231,7 @@ document.getElementById('submitAddQueue').addEventListener('click', async (event
 });
 
 // Edit Queues
-window.editQueue = async function(queue_id) {
+window.editQueue = async function(appointment_id) {
     console.log("Edit Queue clicked");
 
     const { data, error } = await supabase
