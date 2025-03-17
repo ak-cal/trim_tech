@@ -51,8 +51,9 @@ export function onSessionStateChange(callback) {
 // Check if user is admin function
 export async function isAdmin() {
     const session = await getCurrentSession();
-    if (session && (session.user.role === 'admin' || session.user.role === 'admin,barber')) {
-        return true;
+    if (session) {
+        const roles = session.user.role.split(','); // Handle multiple roles
+        return roles.includes('admin');
     }
     return false;
 }
