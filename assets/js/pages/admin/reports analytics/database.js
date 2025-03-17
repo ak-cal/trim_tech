@@ -98,25 +98,33 @@ async function fetchMonthlyReport() {
 async function fetchAppointmentsByBarber() {
     const { data, error } = await supabase
         .from('Appointments')
-        .select('barber_id, count:appointment_id')
-        .in('status', ['Completed', 'Extended'])
-        .group('barber_id');
+        .select(`
+            barber_id,
+            Barbers(Staff(Users(name))),
+            count:appointment_id
+        `)
+        .in('status', ['Completed', 'Extended']);
 
     if (error) {
         console.error('Error fetching appointments by barber:', error);
         return;
     }
 
-    const barberChart = document.getElementById('barberChart').getContext('2d');
-    const labels = data.map(item => item.barber_id);
-    const counts = data.map(item => item.count);
+    const barberCounts = data.reduce((acc, appointment) => {
+        acc[appointment.Barbers.Staff.Users.name] = (acc[appointment.Barbers.Staff.Users.name] || 0) + 1;
+        return acc;
+    }, {});
 
+    const labels = Object.keys(barberCounts);
+    const counts = Object.values(barberCounts);
+
+    const barberChart = document.getElementById('barberChart').getContext('2d');
     new Chart(barberChart, {
         type: 'bar',
         data: {
             labels: labels,
             datasets: [{
-                label: 'Appointments by Barber',
+                label: 'Appointments',
                 data: counts,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -137,25 +145,33 @@ async function fetchAppointmentsByBarber() {
 async function fetchPopularServices() {
     const { data, error } = await supabase
         .from('Appointments')
-        .select('service_id, count:appointment_id')
-        .in('status', ['Completed', 'Extended'])
-        .group('service_id');
+        .select(`
+            service_id,
+            Services(name),
+            count:appointment_id
+        `)
+        .in('status', ['Completed', 'Extended']);
 
     if (error) {
         console.error('Error fetching popular services:', error);
         return;
     }
 
-    const serviceChart = document.getElementById('serviceChart').getContext('2d');
-    const labels = data.map(item => item.service_id);
-    const counts = data.map(item => item.count);
+    const serviceCounts = data.reduce((acc, appointment) => {
+        acc[appointment.Services.name] = (acc[appointment.Services.name] || 0) + 1;
+        return acc;
+    }, {});
 
+    const labels = Object.keys(serviceCounts);
+    const counts = Object.values(serviceCounts);
+
+    const serviceChart = document.getElementById('serviceChart').getContext('2d');
     new Chart(serviceChart, {
         type: 'pie',
         data: {
             labels: labels,
             datasets: [{
-                label: 'Popular Services',
+                label: 'Done',
                 data: counts,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',

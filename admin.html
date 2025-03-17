@@ -34,6 +34,7 @@
     
     <!--=============== EXTERNAL JS ===============-->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>Federal Barbers - Admin Dashboard</title>
 </head>
@@ -696,11 +697,22 @@
                 </div>
             </div>
         
-            <h3>Appointments by Barber</h3>
-            <canvas id="barberChart"><!-- Appointments by Barber will be dynamically loaded here --></canvas>
-        
-            <h3>Popular Services</h3>
-            <canvas id="serviceChart"><!-- Popular Services will be dynamically loaded here --></canvas>
+            <div class="reports_analytics-cards">
+                <div class="card-section">
+                    <div class="card">
+                        <h3>Appointments by Barber</h3>
+                        <canvas id="barberChart"><!-- Appointments by Barber will be dynamically loaded here --></canvas>
+                    </div>
+                </div>
+
+                <div class="card-section">
+                    <div class="card">
+                        <h3>Popular Services</h3>
+                        <canvas id="serviceChart"><!-- Popular Services will be dynamically loaded here --></canvas>
+                    </div>
+                </div>
+            </div>
+            
         
             <button class="btn btn-add btn-blue" onclick="exportReport()">Download CSV Report</button>
         </div>        
