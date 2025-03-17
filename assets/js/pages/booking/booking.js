@@ -1,38 +1,38 @@
 import { supabase } from "../../config/supabase.js";
 
-        let selectedDate = null;
+let selectedDate = null;
 
-        async function getUserId() {
-            const { data: { user }, error } = await supabase.auth.getUser();
-            if (error) {
-                console.error("Error getting user:", error);
-                return null;
-            }
-            return user ? user.id : null;
-        }
+async function getUserId() {
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error) {
+        console.error("Error getting user:", error);
+        return null;
+    }
+    return user ? user.id : null;
+}
 
-        function generateCalendar(month, year) {
-            const calendarDiv = document.getElementById("calendar");
-            calendarDiv.innerHTML = "";
-            const firstDay = new Date(year, month, 1);
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            for (let i = 1; i <= daysInMonth; i++) {
-                const dayDiv = document.createElement("div");
-                dayDiv.textContent = i;
-                dayDiv.addEventListener("click", () => {
-                    selectedDate = new Date(year, month, i);
-                    highlightSelectedDate();
-                });
-                calendarDiv.appendChild(dayDiv);
-            }
-        }
+function generateCalendar(month, year) {
+    const calendarDiv = document.getElementById("calendar");
+    calendarDiv.innerHTML = "";
+    const firstDay = new Date(year, month, 1);
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    for (let i = 1; i <= daysInMonth; i++) {
+        const dayDiv = document.createElement("div");
+        dayDiv.textContent = i;
+        dayDiv.addEventListener("click", () => {
+            selectedDate = new Date(year, month, i);
+            highlightSelectedDate();
+        });
+        calendarDiv.appendChild(dayDiv);
+    }
+}
 
-        function highlightSelectedDate() {
-            document.querySelectorAll(".calendar div").forEach(div => div.classList.remove("selected"));
-            document.querySelector(`.calendar div:nth-child(${selectedDate.getDate()})`).classList.add("selected");
-        }
+function highlightSelectedDate() {
+    document.querySelectorAll(".calendar div").forEach(div => div.classList.remove("selected"));
+    document.querySelector(`.calendar div:nth-child(${selectedDate.getDate()})`).classList.add("selected");
+}
 
-        document.getElementById("bookBtn").addEventListener("click", async () => {
+document.getElementById("bookBtn").addEventListener("click", async () => {
     const userId = await getUserId();
     if (!userId) {
         document.getElementById("message").innerHTML = "<p class='error-message'>Please log in first!</p>";
@@ -71,10 +71,9 @@ import { supabase } from "../../config/supabase.js";
         : "<p class='success-message'>Appointment booked successfully!</p>";
 });
 
+const today = new Date();
+generateCalendar(today.getMonth(), today.getFullYear());
 
-        const today = new Date();
-        generateCalendar(today.getMonth(), today.getFullYear());
-
-        document.getElementById("exitBtn").addEventListener("click", () => {
+document.getElementById("exitBtn").addEventListener("click", () => {
     window.location.href = "index.html";
 });
